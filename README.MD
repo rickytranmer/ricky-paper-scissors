@@ -1,12 +1,9 @@
 # Rock, Paper, Scissors, Score!
--RPS, with a weighted twist-
 
-## Sub header
+[Trello](https://trello.com/b/enXXdmEj/wdi-6-project-1)
+[Wireframes](https://drive.google.com/open?id=1szioAdYoNQNIWoCWDdpcaTEwnO5-bF2E)
 
-1. **Item1** text.
+## A Twist on a Classic
 
-#### Sub sub header
-
-Texty text text.
-
-* More text
+### Weighted Options
+Most of today's 2D fighters still rely on some form of Rock, Paper, Scissors (Attack, Block, Grab).  The option a player chooses is based on weighted criteria.  This game seeks to bring that idea to its simplest form.  Your choices will have different point values (1-6 / standard dice roll), but your opponent will know them, too.  Let the mind games begin.
