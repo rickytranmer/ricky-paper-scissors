@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/mononoki" type="text/css"/>
 </head>
 <body>
 	<div class="container">
@@ -21,31 +22,30 @@
 			</div>
 			
 			<section class="jumbotron row">
-					<!-- 	Options Styling:
-						padding: 5vh 5vw;
-						margin: 05.vh .5vw;					
-					-->
 				<h2 class="display-4 col-lg-12">Modes</h4>
+
 				<!-- 2 PLAYER / vs CPU-->
 				<div class="playerSelect col-md-6">
 					<h4>PLAYERS</h4>
-					<!-- Change selection using 'btn-outline-secondary' -->
-					<p id="2-player" class="btn-secondary btn btn-block">2 Player</p>
-					<p id="vs-cpu" class="btn-secondary btn btn-block btn-outline-secondary">vs CPU</p>
+					<!-- Change selection using 'active' -->
+					<p id="two-player" class="btn-secondary btn btn-block active">2 Player</p>
+					<p id="vs-cpu" class="btn-secondary btn btn-block">vs CPU</p>
 				</div>
-
-				<!-- <div class="col-md-4"></div> -->
 				
 				<!-- SHARED/SEPARATE POINT VALUES -->
 				<div class="pointSystem col-md-6">
 					<h4>SCORING</h4>
-					<p id="separate-score" class="btn-secondary btn btn-block btn-outline-secondary">Separate</p>
-					<p id="shared-score" class="btn-secondary btn btn-block">Shared</p>
+					<p id="separate-score" class="btn-secondary btn btn-block">Separate</p>
+					<p id="shared-score" class="btn-secondary btn btn-block active">Shared</p>
 				</div>
 
 			</section>
-				<a href="game.html"><button class="btn btn-lg btn-success">START</button></a>
+				<div class="centerMe">
+					<a href="game.html"><button class="btn btn-lg btn-success">START</button></a>
+				</div>
 		</main>
 	</div>
+	
+	<script type="text/javascript" src="js/app.js"></script>
 </body>
 </html>

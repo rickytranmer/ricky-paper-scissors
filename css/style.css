@@ -1,0 +1,43 @@
+body {
+	background: black;
+	font-family: mononokiRegular;
+}
+h1, h3 {
+	color: white;
+}
+h3 {
+	text-align: right;
+}
+h4 {
+	color: red;
+	margin-top: 10px;
+}
+img {
+	width: 25vw;
+	height: auto;
+}
+
+.jumbotron {
+	padding: .25rem 2rem;
+	text-align: center;
+}
+.centerMe {
+	text-align: center;
+}
+.btn-success {
+	font-size: 2rem;
+}
+.btn-hand {
+	padding: 1rem .5rem;
+}
+.scores {
+	font-size: 1.5rem;
+}
+
+#two-player, #vs-cpu, #separate-score, #shared-score  {
+	padding: 35px;	
+	margin: 2px auto;
+}
+#score-text, #game-text {
+	font-size: 2rem;
+}
