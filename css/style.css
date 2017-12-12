@@ -38,6 +38,6 @@ img {
 	padding: 35px;	
 	margin: 2px auto;
 }
-#score-text, #game-text {
+#score-text, #round-text {
 	font-size: 2rem;
 }
