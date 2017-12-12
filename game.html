@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>RPS, Score!</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<div class="container">
+		<header>
+			<h1>ROCK, PAPER, SCISSORS, SCORE!</h1>
+			<h3>by Ricky Tranmer</h3>
+		</header>
+		<main>
+			<!-- HOW TO -->
+			<div class="jumbotron">
+				<div class="row">
+					<div class="playerSelect col-md-6 display-4">
+						<h4>GAME</h4>
+						<p id="gameText">0</p>
+					</div>
+					<div class="playerSelect col-md-6 display-4">
+						<h4>SCORE</h4>
+						<p id='scoreText'>0 vs 0</p>
+					</div>
+				</div>
+			</div>
+			
+			<section class="row">
+				<div class="player-one col-lg-5 col-md-12 jumbotron">
+					<h4>PLAYER 1</h4>
+					<div class="row">
+						<div class="col-sm-4"><p id="oneRock" class="btn-secondary btn btn-lg">Rock</p></div>
+						<div class="col-sm-4"><p id="onePaper" class="btn-secondary btn btn-lg">Paper</p></div>
+						<div class="col-sm-4"><p id="oneScissors" class="btn-secondary btn btn-lg">Scissors</p></div>
+					</div>
+					<!-- Show button inputs for Player 1 -->
+					<div class="row">
+						<p class="col-sm-4">Q</p>
+						<p class="col-sm-4">W</p>
+						<p class="col-sm-4">E</p>
+					</div>
+				</div>
+			
+				<div class="player-one col-sm-2"></div>
+				
+				<div class="player-one col-lg-5 col-md-12 jumbotron">
+					<h4>PLAYER 2</h4>
+					<div class="row">
+						<div class="col-sm-4"><p id="twoRock" class="btn-secondary btn btn-lg">Rock</p></div>
+						<div class="col-sm-4"><p id="twoPaper" class="btn-secondary btn btn-lg">Paper</p></div>
+						<div class="col-sm-4"><p id="twoScissors" class="btn-secondary btn btn-lg">Scissors</p></div>
+					</div>
+					<!-- Show button inputs for Player 2 -->
+					<div class="row">
+						<p class="col-sm-4">I</p>
+						<p class="col-sm-4">O</p>
+						<p class="col-sm-4">P</p>
+					</div>
+				</div>
+
+			</section>
+				<!-- <a href="game.html"><button class="btn btn-lg btn-success">START</button></a> -->
+		</main>
+	</div>
+</body>
+</html>
