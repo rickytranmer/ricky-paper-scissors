@@ -69,6 +69,14 @@ function disableTwo() {
 	p2Listener = false;
 }
 
+function flashWinningP() {
+	let flashWinner = document.querySelector('.btn-success');
+	setTimeout(function() { flashWinner.classList.add('btn-outline-success'); }, 500);
+	setTimeout(function() { flashWinner.classList.remove('btn-outline-success'); }, 1000);
+	setTimeout(function() { flashWinner.classList.add('btn-outline-success'); }, 1500);
+	setTimeout(function() { flashWinner.classList.remove('btn-outline-success'); }, 2000);
+}
+
 // -
 function scoreRound(){
 	switch (p1Choice) {
@@ -77,6 +85,10 @@ function scoreRound(){
 				//tie
 				oneRock.classList.remove('disabled');
 				twoRock.classList.remove('disabled');
+				setTimeout(function() { oneRock.classList.add('btn-outline-secondary'); }, 500);
+				setTimeout(function() { oneRock.classList.remove('btn-outline-secondary'); }, 1000);
+				setTimeout(function() { twoRock.classList.add('btn-outline-secondary'); }, 500);
+				setTimeout(function() { twoRock.classList.remove('btn-outline-secondary'); }, 1000);
 			} else if (p2Choice == 'o') {
 				//p2 wins
 				oneRock.classList.remove('disabled');
@@ -105,6 +117,10 @@ function scoreRound(){
 				//tie
 				onePaper.classList.remove('disabled');
 				twoPaper.classList.remove('disabled');
+				setTimeout(function() { onePaper.classList.add('btn-outline-secondary'); }, 500);
+				setTimeout(function() { onePaper.classList.remove('btn-outline-secondary'); }, 1000);
+				setTimeout(function() { twoPaper.classList.add('btn-outline-secondary'); }, 500);
+				setTimeout(function() { twoPaper.classList.remove('btn-outline-secondary'); }, 1000);
 			} else {
 				//p2 wins
 				onePaper.classList.remove('disabled');
@@ -133,11 +149,18 @@ function scoreRound(){
 				//tie
 				oneScissors.classList.remove('disabled');
 				twoScissors.classList.remove('disabled');
+				setTimeout(function() { oneScissors.classList.add('btn-outline-secondary'); }, 500);
+				setTimeout(function() { oneScissors.classList.remove('btn-outline-secondary'); }, 1000);
+				setTimeout(function() { twoScissors.classList.add('btn-outline-secondary'); }, 500);
+				setTimeout(function() { twoScissors.classList.remove('btn-outline-secondary'); }, 1000);
 			}
 			break;
 	}
+
+	flashWinningP();
+
 	// - Print new score
-	scoreText.innerText = p1Score + ' vs ' + p2Score;
+	scoreText.innerHTML = '<span class="bigger-text">' + p1Score + '</span> vs <span class="bigger-text">' + p2Score + '</span';
 }
 
 // Key Listener
