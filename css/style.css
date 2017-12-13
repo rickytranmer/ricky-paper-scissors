@@ -20,6 +20,7 @@ img {
 .jumbotron {
 	padding: .25rem 1rem;
 	text-align: center;
+	margin-bottom: 25px;
 }
 .centerMe {
 	text-align: center;
@@ -40,4 +41,7 @@ img {
 }
 #start-button {
 	font-size: 2rem;
+}
+.bigger-text {
+	font-weight: bold;
 }
