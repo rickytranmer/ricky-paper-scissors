@@ -133,6 +133,7 @@ function shakeHands() {
 
 // - Disable p1 inputs, score if p2 ready
 function disableOne() {
+	console.log('p1 choice' + p1Choice);
 	oneRock.classList.add('disabled');
 	onePaper.classList.add('disabled');
 	oneScissors.classList.add('disabled');
@@ -146,6 +147,7 @@ function disableOne() {
 
 // - Disable p2 inputs, score if p1 ready
 function disableTwo() {
+	console.log('p1 choice' + p1Choice);
 	twoRock.classList.add('disabled');
 	twoPaper.classList.add('disabled');
 	twoScissors.classList.add('disabled');
@@ -323,8 +325,8 @@ twoPaper.addEventListener('click', function() {
 });
 twoScissors.addEventListener('click', function() {
 	if (p2Listener) {
-		disableTwo();
 		p2Choice = 'p';
+		disableTwo();
 	} else {
 		console.log('p1 finished first');
 		scoreRound();
