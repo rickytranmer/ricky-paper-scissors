@@ -87,20 +87,30 @@ function randomPoints() {
 	scisssorsScoreP.innerText = scissorsScore + 'pts';
 }
 
-// - Disable player one inputs
+// - Disable p1 inputs, score if p2 ready
 function disableOne() {
 	oneRock.classList.add('disabled');
 	onePaper.classList.add('disabled');
 	oneScissors.classList.add('disabled');
 	p1Listener = false;
+
+	if (!p2Listener) {
+		console.log('p2 finished first');
+		scoreRound();
+	}
 }
 
-// - Disable player two inputs
+// - Disable p2 inputs, score if p1 ready
 function disableTwo() {
 	twoRock.classList.add('disabled');
 	twoPaper.classList.add('disabled');
 	twoScissors.classList.add('disabled');
 	p2Listener = false;
+
+	if (!p1Listener) {
+		console.log('p1 finished first');
+		scoreRound();
+	}
 }
 
 
@@ -183,7 +193,7 @@ function scoreRound(){
 	}, 2500);
 }
 
-// Key Listener
+// - Key Listener
 document.addEventListener('keyup', function(event) {
 	const keyName = event.key;
 	if ( p1Listener && ((keyName == 'q') || (keyName == 'w') || (keyName == 'e')) ) {
@@ -195,10 +205,6 @@ document.addEventListener('keyup', function(event) {
 				disableOne();
 				p1Choice = keyName;
 				break;
-		}
-		if (!p2Listener) {
-			console.log('p2 finished first');
-			scoreRound();
 		}
 	}
 
@@ -212,10 +218,6 @@ document.addEventListener('keyup', function(event) {
 				p2Choice = keyName;
 				break;
 		}
-		if (!p1Listener) {
-			console.log('p1 finished first');
-			scoreRound();
-		}
 	}
 	if ((p1Choice) || (p2Choice)) {
 		console.log(p1Choice + ' ' + p2Choice);
@@ -223,6 +225,66 @@ document.addEventListener('keyup', function(event) {
 		console.log('invalid input (caps lock?)');
 	}
 });
+
+// - Click Listeners
+	// Player 1
+oneRock.addEventListener('click', function() {
+	if (p1Listener) {
+		p1Choice = 'q';
+		disableOne();
+	} else {
+		console.log('p2 finished first');
+		scoreRound();
+	}
+});
+onePaper.addEventListener('click', function() {
+	if (p1Listener) {
+		p1Choice = 'w';
+		disableOne();
+	} else {
+		console.log('p2 finished first');
+		scoreRound();
+	}
+});
+oneScissors.addEventListener('click', function() {
+	if (p1Listener) {
+		p1Choice = 'e';
+		disableOne();
+	} else {
+		console.log('p2 finished first');
+		scoreRound();
+	}
+});
+
+	// Player 2
+twoRock.addEventListener('click', function() {
+	if (p2Listener) {
+		p2Choice = 'i';
+		disableTwo();
+	} else {
+		console.log('p1 finished first');
+		scoreRound();
+	}
+});
+twoPaper.addEventListener('click', function() {
+	if (p2Listener) {
+		p2Choice = 'o';
+		disableTwo();
+	} else {
+		console.log('p1 finished first');
+		scoreRound();
+	}
+});
+twoScissors.addEventListener('click', function() {
+	if (p2Listener) {
+		disableTwo();
+		p2Choice = 'p';
+	} else {
+		console.log('p1 finished first');
+		scoreRound();
+	}
+});
+
 
 startRound();
 
