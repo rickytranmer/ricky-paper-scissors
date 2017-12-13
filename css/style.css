@@ -24,9 +24,6 @@ img {
 .centerMe {
 	text-align: center;
 }
-.btn-success {
-	font-size: 2rem;
-}
 .btn-hand {
 	padding: 1rem .5rem;
 }
@@ -39,5 +36,8 @@ img {
 	margin: 2px auto;
 }
 #score-text, #round-text {
+	font-size: 2rem;
+}
+#start-button {
 	font-size: 2rem;
 }
