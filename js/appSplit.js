@@ -13,13 +13,21 @@ var roundText = document.getElementById('round-text');
 console.log(scoreText);
 console.log(roundText);
 
-var rockScoreP = document.getElementById('rock-score');
-var paperScoreP = document.getElementById('paper-score');
-var scisssorsScoreP = document.getElementById('scissors-score');
-var rockScore, paperScore, scissorsScore = 1;
-console.log(rockScoreP);
-console.log(paperScoreP);
-console.log(scisssorsScoreP);
+var rockScoreP1 = document.getElementById('rock-score1');
+var paperScoreP1 = document.getElementById('paper-score1');
+var scisssorsScoreP1 = document.getElementById('scissors-score1');
+var rockScore1, paperScore1, scissorsScore1 = 1;
+console.log(rockScoreP1);
+console.log(paperScoreP1);
+console.log(scisssorsScoreP1);
+
+var rockScoreP2 = document.getElementById('rock-score2');
+var paperScoreP2 = document.getElementById('paper-score2');
+var scisssorsScoreP2 = document.getElementById('scissors-score2');
+var rockScore2, paperScore2, scissorsScore2 = 1;
+console.log(rockScoreP2);
+console.log(paperScoreP2);
+console.log(scisssorsScoreP2);
 
 var oneRock = document.getElementById('one-rock');
 var onePaper = document.getElementById('one-paper');
@@ -54,20 +62,30 @@ function startRound() {
 		onePaper.classList.add('btn-success');
 		oneScissors.classList.add('btn-success');
 
-		rockScoreP.innerText = 'PLAYER';
-		paperScoreP.innerText = '1';
-		scisssorsScoreP.innerText = 'WINS';
-		paperScoreP.style.fontWeight = 900;
+		rockScoreP1.innerText = 'PLAYER';
+		paperScoreP1.innerText = '1';
+		scisssorsScoreP1.innerText = 'WINS';
+		paperScoreP1.style.fontWeight = 900;
+
+		rockScoreP2.innerText = 'PLAYER';
+		paperScoreP2.innerText = '1';
+		scisssorsScoreP2.innerText = 'WINS';
+		paperScoreP2.style.fontWeight = 900;
 	} else if (p2Score >= 15) {
 		console.log('p1 wins the game');
 		twoRock.classList.add('btn-success');
 		twoPaper.classList.add('btn-success');
 		twoScissors.classList.add('btn-success');
 
-		rockScoreP.innerText = 'PLAYER';
-		paperScoreP.innerText = '2';
-		scisssorsScoreP.innerText = 'WINS';
-		paperScoreP.style.fontWeight = 900;
+		rockScoreP1.innerText = 'PLAYER';
+		paperScoreP1.innerText = '2';
+		scisssorsScoreP1.innerText = 'WINS';
+		paperScoreP1.style.fontWeight = 900;
+
+		rockScoreP2.innerText = 'PLAYER';
+		paperScoreP2.innerText = '2';
+		scisssorsScoreP2.innerText = 'WINS';
+		paperScoreP2.style.fontWeight = 900;
 	} else {
 		//Rock, Paper, Scissors!
 		p1Listener = true;
@@ -79,24 +97,37 @@ function startRound() {
 
 // - Store 3 randoms in 3 score display <p>'s & 3 variables
 function randomPoints() {
-	rockScore = Math.floor((Math.random() * 5) + 1);
-	paperScore = Math.floor((Math.random() * 5) + 1);
-	scissorsScore = Math.floor((Math.random() * 5) + 1);
-	console.log(rockScore + ' ' + paperScore + ' ' + scissorsScore);
-	rockScoreP.innerText = rockScore + 'pts';
-	paperScoreP.innerText = paperScore + 'pts';
-	scisssorsScoreP.innerText = scissorsScore + 'pts';
+	rockScore1 = Math.floor((Math.random() * 5) + 1);
+	paperScore1 = Math.floor((Math.random() * 5) + 1);
+	scissorsScore1 = Math.floor((Math.random() * 5) + 1);
+	rockScore2 = Math.floor((Math.random() * 5) + 1);
+	paperScore2 = Math.floor((Math.random() * 5) + 1);
+	scissorsScore2 = Math.floor((Math.random() * 5) + 1);
+	rockScoreP1.innerText = rockScore1 + 'pts';
+	paperScoreP1.innerText = paperScore1 + 'pts';
+	scisssorsScoreP1.innerText = scissorsScore1 + 'pts';
+	rockScoreP2.innerText = rockScore2 + 'pts';
+	paperScoreP2.innerText = paperScore2 + 'pts';
+	scisssorsScoreP2.innerText = scissorsScore2 + 'pts';
 }
 
 // - Shake hands, show round is starting
 function shakeHands() {
-	document.querySelectorAll('img')[0].style.animation = 'shake .33s'
+	document.querySelectorAll('img')[0].style.animation = 'shake .33s';
+	document.querySelectorAll('img')[3].style.animation = 'shake .33s';
 	setTimeout(function() { document.querySelectorAll('img')[1].style.animation = 'shake .33s'; }, 333);
+	setTimeout(function() { document.querySelectorAll('img')[4].style.animation = 'shake .33s'; }, 333);
 	setTimeout(function() { document.querySelectorAll('img')[2].style.animation = 'shake .33s'; }, 666);
+	setTimeout(function() { document.querySelectorAll('img')[5].style.animation = 'shake .33s'; }, 666);
 	setTimeout(function() { 
 		document.querySelectorAll('img')[0].style.animation = '';
 		document.querySelectorAll('img')[1].style.animation = '';
 		document.querySelectorAll('img')[2].style.animation = '';
+	}, 1000);
+	setTimeout(function() { 
+		document.querySelectorAll('img')[3].style.animation = '';
+		document.querySelectorAll('img')[4].style.animation = '';
+		document.querySelectorAll('img')[5].style.animation = '';
 	}, 1000);
 }
 
@@ -164,36 +195,38 @@ function flashTie(p1Hand, p2Hand) {
 
 // - Determine winner, apply points
 function scoreRound(){
+	console.log('p1' + p1Choice);
+	console.log('p2' + p2Choice);
 	switch (p1Choice) {
 		case 'q':
 			if (p2Choice == 'i') {
 				flashTie(oneRock, twoRock);
 			} else if (p2Choice == 'o') {
-				p2Score += paperScore;
-				flashWinningP(twoPaper, oneRock, paperScoreP);
+				p2Score += paperScore2;
+				flashWinningP(twoPaper, oneRock, paperScoreP2);
 			} else {
-				p1Score += rockScore;
-				flashWinningP(oneRock, twoScissors, rockScoreP);
+				p1Score += rockScore1;
+				flashWinningP(oneRock, twoScissors, rockScoreP1);
 			}
 			break;
 		case 'w':
 			if (p2Choice == 'i') {
-				p1Score += paperScore;
-				flashWinningP(onePaper, twoRock, paperScoreP);
+				p1Score += paperScore1;
+				flashWinningP(onePaper, twoRock, paperScoreP1);
 			} else if (p2Choice == 'o') {
 				flashTie(onePaper, twoPaper);
 			} else {
-				p2Score += scissorsScore;
-				flashWinningP(twoScissors,onePaper, scisssorsScoreP);
+				p2Score += scissorsScore2;
+				flashWinningP(twoScissors, onePaper, scisssorsScoreP2);
 			}
 			break;
 		case 'e':
 			if (p2Choice == 'i') {
-				p2Score += rockScore;
-				flashWinningP(twoRock, oneScissors, rockScoreP);
+				p2Score += rockScore2;
+				flashWinningP(twoRock, oneScissors, rockScoreP2);
 			} else if (p2Choice == 'o') {
-				p1Score += scissorsScore;
-				flashWinningP(oneScissors, twoPaper, scisssorsScoreP);
+				p1Score += scissorsScore1;
+				flashWinningP(oneScissors, twoPaper, scisssorsScoreP1);
 			} else {
 				flashTie(oneScissors, twoScissors);
 			}
@@ -215,8 +248,8 @@ document.addEventListener('keyup', function(event) {
 			case 'q':
 			case 'w':
 			case 'e':
-				disableOne();
 				p1Choice = keyName;
+				disableOne();
 				break;
 		}
 	}
@@ -227,8 +260,8 @@ document.addEventListener('keyup', function(event) {
 			case 'i':
 			case 'o':
 			case 'p':
-				disableTwo();
 				p2Choice = keyName;
+				disableTwo();
 				break;
 		}
 	}
@@ -299,23 +332,4 @@ twoScissors.addEventListener('click', function() {
 });
 
 
-startRound();
-
-
-// TODO List - Functions
-// - event listeners
-// - ignore input
-// - score after both input
-// - score round
-// - red for loser, green for winner
-// - add pts, increase rounds
-
-
-
-//score round
-//randomize points
-//event listener for buttons
-//- remove ability to take in new inputs
-	//index.html
-//change 'active' if button is clicked
-//event listener for start
+setTimeout(function() { startRound(); }, 333);
