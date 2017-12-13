@@ -73,6 +73,7 @@ function startRound() {
 		p1Listener = true;
 		p2Listener = true;
 		randomPoints();
+		shakeHands();
 	}
 }
 
@@ -85,6 +86,18 @@ function randomPoints() {
 	rockScoreP.innerText = rockScore + 'pts';
 	paperScoreP.innerText = paperScore + 'pts';
 	scisssorsScoreP.innerText = scissorsScore + 'pts';
+}
+
+// - Shake hands, show round is starting
+function shakeHands() {
+	document.querySelectorAll('img')[0].style.animation = 'shake .33s'
+	setTimeout(function() { document.querySelectorAll('img')[1].style.animation = 'shake .33s'; }, 333);
+	setTimeout(function() { document.querySelectorAll('img')[2].style.animation = 'shake .33s'; }, 666);
+	setTimeout(function() { 
+		document.querySelectorAll('img')[0].style.animation = '';
+		document.querySelectorAll('img')[1].style.animation = '';
+		document.querySelectorAll('img')[2].style.animation = '';
+	}, 1000);
 }
 
 // - Disable p1 inputs, score if p2 ready
