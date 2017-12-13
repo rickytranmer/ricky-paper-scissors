@@ -3,8 +3,8 @@ console.log('JS works');
 var p1Score = 0;
 var p2Score = 0;
 var rounds = -1;
-var p1Choice = 'd';
-var p2Choice = 'd';
+var p1Choice = '';
+var p2Choice = '';
 var p1Listener = false;
 var p2Listener = false;
 
@@ -38,7 +38,7 @@ console.log(twoScissors);
 function startRound() {
 	rounds++;
 	roundText.innerText = rounds;
-
+	
 	// - Reset hand input classes
 	oneRock.classList.remove('disabled');
 	onePaper.classList.remove('disabled');
@@ -46,12 +46,34 @@ function startRound() {
 	twoRock.classList.remove('disabled');
 	twoPaper.classList.remove('disabled');
 	twoScissors.classList.remove('disabled');
-	
-	randomPoints();
-	
-	//Rock, Paper, Scissors!
-	p1Listener = true;
-	p2Listener = true;
+
+	// - Check if winner - else play!
+	if (p1Score >= 15) {
+		console.log('p1 wins the game');
+		oneRock.classList.add('btn-success');
+		onePaper.classList.add('btn-success');
+		oneScissors.classList.add('btn-success');
+
+		rockScoreP.innerText = 'PLAYER';
+		paperScoreP.innerText = '1';
+		scisssorsScoreP.innerText = 'WINS';
+		paperScoreP.style.fontWeight = 900;
+	} else if (p2Score >= 15) {
+		console.log('p1 wins the game');
+		twoRock.classList.add('btn-success');
+		twoPaper.classList.add('btn-success');
+		twoScissors.classList.add('btn-success');
+
+		rockScoreP.innerText = 'PLAYER';
+		paperScoreP.innerText = '2';
+		scisssorsScoreP.innerText = 'WINS';
+		paperScoreP.style.fontWeight = 900;
+	} else {
+		//Rock, Paper, Scissors!
+		p1Listener = true;
+		p2Listener = true;
+		randomPoints();
+	}
 }
 
 // - Store 3 randoms in 3 score display <p>'s & 3 variables
@@ -81,6 +103,7 @@ function disableTwo() {
 	p2Listener = false;
 }
 
+
 // - Bold winning hand pts value, flash Winner's hand button
 function flashWinningP(winningHand, losingHand, handScore) {
 	handScore.style.fontWeight = 900;
@@ -102,7 +125,7 @@ function flashWinningP(winningHand, losingHand, handScore) {
 	setTimeout(function() {
 		winningHand.classList.remove('btn-success');
 		losingHand.classList.remove('btn-danger');
-	}, 2500);
+	}, 2500)
 }
 
 // - Both hands briefly flash
@@ -116,7 +139,7 @@ function flashTie(p1Hand, p2Hand) {
 	setTimeout(function() { p2Hand.classList.remove('btn-outline-secondary'); }, 1000);
 }
 
-// -
+// - Determine winner, apply points
 function scoreRound(){
 	switch (p1Choice) {
 		case 'q':
@@ -194,8 +217,11 @@ document.addEventListener('keyup', function(event) {
 			scoreRound();
 		}
 	}
-
-	console.log(p1Choice + ' ' + p2Choice);
+	if ((p1Choice) || (p2Choice)) {
+		console.log(p1Choice + ' ' + p2Choice);
+	} else {
+		console.log('invalid input (caps lock?)');
+	}
 });
 
 startRound();
