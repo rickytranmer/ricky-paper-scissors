@@ -114,7 +114,7 @@ function randomPoints() {
 // - Shake hands, show round is starting
 function shakeHands() {
 	document.querySelectorAll('img')[0].style.animation = 'shake .33s';
-	var audio = new Audio('audio/Slap.mp3');
+	var audio = new Audio('audio/Slap.mp3'); //http://soundbible.com/2047-Banana-Slap.html
 	audio.play();
 	document.querySelectorAll('img')[3].style.animation = 'shake .33s';
 
