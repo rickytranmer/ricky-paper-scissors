@@ -1,6 +1,7 @@
 # Rock, Paper, Scissors, Score!
 
 ## A Twist on a Classic
+## [PLAY ME](https://rickytranmer.github.io/wdi-project-1/index.html)
 
 [Trello](https://trello.com/b/enXXdmEj/wdi-6-project-1)
 
