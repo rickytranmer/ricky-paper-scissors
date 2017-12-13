@@ -36,12 +36,10 @@ img {
 	padding: 35px;	
 	margin: 2px auto;
 }
-#score-text, #round-text {
-	font-size: 2rem;
-}
 #start-button {
 	font-size: 2rem;
 }
 .bigger-text {
+	font-size: 2.4rem;
 	font-weight: bold;
 }

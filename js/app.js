@@ -69,12 +69,26 @@ function disableTwo() {
 	p2Listener = false;
 }
 
-function flashWinningP() {
-	let flashWinner = document.querySelector('.btn-success');
-	setTimeout(function() { flashWinner.classList.add('btn-outline-success'); }, 500);
-	setTimeout(function() { flashWinner.classList.remove('btn-outline-success'); }, 1000);
-	setTimeout(function() { flashWinner.classList.add('btn-outline-success'); }, 1500);
-	setTimeout(function() { flashWinner.classList.remove('btn-outline-success'); }, 2000);
+function flashWinningP(winningHand, losingHand) {
+	winningHand.classList.remove('disabled');
+	winningHand.classList.add('btn-success');
+	losingHand.classList.remove('disabled');
+	losingHand.classList.add('btn-danger');
+
+	setTimeout(function() { winningHand.classList.add('btn-outline-success'); }, 500);
+	setTimeout(function() { winningHand.classList.remove('btn-outline-success'); }, 1000);
+	setTimeout(function() { winningHand.classList.add('btn-outline-success'); }, 1500);
+	setTimeout(function() { winningHand.classList.remove('btn-outline-success'); }, 2000);
+}
+
+function flashTie(p1Hand, p2Hand) {
+	p1Hand.classList.remove('disabled');
+	p2Hand.classList.remove('disabled');
+	
+	setTimeout(function() { p1Hand.classList.add('btn-outline-secondary'); }, 500);
+	setTimeout(function() { p1Hand.classList.remove('btn-outline-secondary'); }, 1000);
+	setTimeout(function() { p2Hand.classList.add('btn-outline-secondary'); }, 500);
+	setTimeout(function() { p2Hand.classList.remove('btn-outline-secondary'); }, 1000);
 }
 
 // -
@@ -82,82 +96,38 @@ function scoreRound(){
 	switch (p1Choice) {
 		case 'q':
 			if (p2Choice == 'i') {
-				//tie
-				oneRock.classList.remove('disabled');
-				twoRock.classList.remove('disabled');
-				setTimeout(function() { oneRock.classList.add('btn-outline-secondary'); }, 500);
-				setTimeout(function() { oneRock.classList.remove('btn-outline-secondary'); }, 1000);
-				setTimeout(function() { twoRock.classList.add('btn-outline-secondary'); }, 500);
-				setTimeout(function() { twoRock.classList.remove('btn-outline-secondary'); }, 1000);
+				flashTie(oneRock, twoRock);
 			} else if (p2Choice == 'o') {
-				//p2 wins
-				oneRock.classList.remove('disabled');
-				oneRock.classList.add('btn-danger');
-				twoPaper.classList.remove('disabled');
-				twoPaper.classList.add('btn-success');
 				p2Score += paperScore;
+				flashWinningP(twoPaper, oneRock);
 			} else {
-				//p1 wins
-				oneRock.classList.remove('disabled');
-				oneRock.classList.add('btn-success');
-				twoScissors.classList.remove('disabled');
-				twoScissors.classList.add('btn-danger');
 				p1Score += rockScore;
+				flashWinningP(oneRock, twoScissors);
 			}
 			break;
 		case 'w':
 			if (p2Choice == 'i') {
-				//p1 win
-				onePaper.classList.remove('disabled');
-				onePaper.classList.add('btn-success');
-				twoRock.classList.remove('disabled');
-				twoRock.classList.add('btn-danger');
 				p1Score += paperScore;
+				flashWinningP(onePaper, twoRock);
 			} else if (p2Choice == 'o') {
-				//tie
-				onePaper.classList.remove('disabled');
-				twoPaper.classList.remove('disabled');
-				setTimeout(function() { onePaper.classList.add('btn-outline-secondary'); }, 500);
-				setTimeout(function() { onePaper.classList.remove('btn-outline-secondary'); }, 1000);
-				setTimeout(function() { twoPaper.classList.add('btn-outline-secondary'); }, 500);
-				setTimeout(function() { twoPaper.classList.remove('btn-outline-secondary'); }, 1000);
+				flashTie(onePaper, twoPaper);
 			} else {
-				//p2 wins
-				onePaper.classList.remove('disabled');
-				onePaper.classList.add('btn-danger');
-				twoScissors.classList.remove('disabled');
-				twoScissors.classList.add('btn-success');
 				p2Score += scissorsScore;
+				flashWinningP(twoScissors,onePaper);
 			}
 			break;
 		case 'e':
 			if (p2Choice == 'i') {
-				//p2 wins
-				oneScissors.classList.remove('disabled');
-				oneScissors.classList.add('btn-danger');
-				twoRock.classList.remove('disabled');
-				twoRock.classList.add('btn-success');
 				p2Score += rockScore;
+				flashWinningP(twoRock, oneScissors);
 			} else if (p2Choice == 'o') {
-				//p1 wins
-				oneScissors.classList.remove('disabled');
-				oneScissors.classList.add('btn-success');
-				twoPaper.classList.remove('disabled');
-				twoPaper.classList.add('btn-danger');
 				p1Score += scissorsScore;
+				flashWinningP(oneScissors, twoPaper);
 			} else {
-				//tie
-				oneScissors.classList.remove('disabled');
-				twoScissors.classList.remove('disabled');
-				setTimeout(function() { oneScissors.classList.add('btn-outline-secondary'); }, 500);
-				setTimeout(function() { oneScissors.classList.remove('btn-outline-secondary'); }, 1000);
-				setTimeout(function() { twoScissors.classList.add('btn-outline-secondary'); }, 500);
-				setTimeout(function() { twoScissors.classList.remove('btn-outline-secondary'); }, 1000);
+				flashTie(oneScissors, twoScissors);
 			}
 			break;
 	}
-
-	flashWinningP();
 
 	// - Print new score
 	scoreText.innerHTML = '<span class="bigger-text">' + p1Score + '</span> vs <span class="bigger-text">' + p2Score + '</span';
