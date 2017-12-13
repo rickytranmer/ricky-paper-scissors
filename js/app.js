@@ -215,8 +215,8 @@ document.addEventListener('keyup', function(event) {
 			case 'q':
 			case 'w':
 			case 'e':
-				disableOne();
 				p1Choice = keyName;
+				disableOne();
 				break;
 		}
 	}
@@ -227,8 +227,8 @@ document.addEventListener('keyup', function(event) {
 			case 'i':
 			case 'o':
 			case 'p':
-				disableTwo();
 				p2Choice = keyName;
+				disableTwo();
 				break;
 		}
 	}
@@ -290,8 +290,8 @@ twoPaper.addEventListener('click', function() {
 });
 twoScissors.addEventListener('click', function() {
 	if (p2Listener) {
-		disableTwo();
 		p2Choice = 'p';
+		disableTwo();
 	} else {
 		console.log('p1 finished first');
 		scoreRound();
@@ -299,23 +299,4 @@ twoScissors.addEventListener('click', function() {
 });
 
 
-startRound();
-
-
-// TODO List - Functions
-// - event listeners
-// - ignore input
-// - score after both input
-// - score round
-// - red for loser, green for winner
-// - add pts, increase rounds
-
-
-
-//score round
-//randomize points
-//event listener for buttons
-//- remove ability to take in new inputs
-	//index.html
-//change 'active' if button is clicked
-//event listener for start
+setTimeout(function() { startRound(); }, 333);
