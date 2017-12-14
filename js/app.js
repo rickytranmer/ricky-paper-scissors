@@ -52,6 +52,9 @@ function startRound() {
 	// - Check if winner - else play!
 	if (p1Score >= 15) {
 		console.log('p1 wins the game');
+		p1Listener = false;
+		p2Listener = false;
+
 		oneRock.classList.add('btn-success');
 		onePaper.classList.add('btn-success');
 		oneScissors.classList.add('btn-success');
@@ -60,8 +63,13 @@ function startRound() {
 		paperScoreP.innerText = '1';
 		scisssorsScoreP.innerText = 'WINS';
 		paperScoreP.style.fontWeight = 900;
+
+		createButtons();
 	} else if (p2Score >= 15) {
 		console.log('p1 wins the game');
+		p1Listener = false;
+		p2Listener = false;
+
 		twoRock.classList.add('btn-success');
 		twoPaper.classList.add('btn-success');
 		twoScissors.classList.add('btn-success');
@@ -70,6 +78,8 @@ function startRound() {
 		paperScoreP.innerText = '2';
 		scisssorsScoreP.innerText = 'WINS';
 		paperScoreP.style.fontWeight = 900;
+
+		createButtons();
 	} else {
 		//Rock, Paper, Scissors!
 		p1Listener = true;
@@ -139,20 +149,30 @@ function disableTwo() {
 }
 
 // - Create Back & Reset buttons
-function createButtons () {
+function createButtons() {
 	var resetButtons = document.getElementById('reset-buttons');
 	var resetBtn = document.createElement('button');
 	var backBtn = document.createElement('button');
+
+	resetButtons.style.textAlign = 'center';
+	backBtn.style.margin = '20px';
+	resetBtn.style.margin = '20px';
+
+	backBtn.classList.add('btn-danger');
+	backBtn.classList.add('btn-lg');
+	backBtn.classList.add('btn');
+	backBtn.innerText = 'BACK';
+
 	resetBtn.classList.add('btn-success');
 	resetBtn.classList.add('btn-lg');
 	resetBtn.classList.add('btn');
-	backBtn.classList.add('btn-success');
-	backBtn.classList.add('btn-lg');
-	backBtn.classList.add('btn');
+	resetBtn.innerText = 'RESET';
 
 	// - Attach to col-2 div and listen for clicks
-	resetBtn.addEventListener('click', 'game.html');
-	backBtn.addEventListener('click', );
+	resetButtons.appendChild(backBtn);
+	resetButtons.appendChild(resetBtn);
+	resetBtn.addEventListener('click', function(){ window.location = 'game.html' });
+	backBtn.addEventListener('click', function(){ window.location = 'index.html' });
 }
 
 
@@ -274,27 +294,18 @@ oneRock.addEventListener('click', function() {
 	if (p1Listener) {
 		p1Choice = 'q';
 		disableOne();
-	} else {
-		console.log('p2 finished first');
-		scoreRound();
 	}
 });
 onePaper.addEventListener('click', function() {
 	if (p1Listener) {
 		p1Choice = 'w';
 		disableOne();
-	} else {
-		console.log('p2 finished first');
-		scoreRound();
 	}
 });
 oneScissors.addEventListener('click', function() {
 	if (p1Listener) {
 		p1Choice = 'e';
 		disableOne();
-	} else {
-		console.log('p2 finished first');
-		scoreRound();
 	}
 });
 
@@ -303,27 +314,18 @@ twoRock.addEventListener('click', function() {
 	if (p2Listener) {
 		p2Choice = 'i';
 		disableTwo();
-	} else {
-		console.log('p1 finished first');
-		scoreRound();
 	}
 });
 twoPaper.addEventListener('click', function() {
 	if (p2Listener) {
 		p2Choice = 'o';
 		disableTwo();
-	} else {
-		console.log('p1 finished first');
-		scoreRound();
-	}
+	} 
 });
 twoScissors.addEventListener('click', function() {
 	if (p2Listener) {
 		p2Choice = 'p';
 		disableTwo();
-	} else {
-		console.log('p1 finished first');
-		scoreRound();
 	}
 });
 
