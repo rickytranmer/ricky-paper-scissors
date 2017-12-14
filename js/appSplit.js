@@ -1,6 +1,7 @@
 console.log('JS works');
 
-let audio = new Audio('audio/Slap.mp3'); //http://soundbible.com/2047-Banana-Slap.html
+var audio = new Audio('audio/Slap.mp3'); //http://soundbible.com/2047-Banana-Slap.html
+var audioWin = new Audio('audio/Whpsh.m4a');
 
 var p1Score = 0;
 var p2Score = 0;
@@ -74,7 +75,7 @@ function startRound() {
 		scisssorsScoreP2.innerText = 'WINS';
 		paperScoreP2.style.fontWeight = 900;
 	} else if (p2Score >= 15) {
-		console.log('p1 wins the game');
+		console.log('p2 wins the game');
 		twoRock.classList.add('btn-success');
 		twoPaper.classList.add('btn-success');
 		twoScissors.classList.add('btn-success');
@@ -200,6 +201,7 @@ function createButtons() {
 // - Bold winning hand pts value, flash Winner's hand button
 function flashWinningP(winningHand, losingHand, handScore) {
 	handScore.style.fontWeight = 900;
+	setTimeout(function() { audioWin.play(); }, 333);
 
 	winningHand.classList.remove('disabled');
 	winningHand.classList.add('btn-success');

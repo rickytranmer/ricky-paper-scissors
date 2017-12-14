@@ -1,6 +1,7 @@
 console.log('JS works');
 
 var audio = new Audio('audio/Slap.mp3');
+var audioWin = new Audio('audio/Whpsh.m4a');
 
 var p1Score = 0;
 var p2Score = 0;
@@ -66,7 +67,7 @@ function startRound() {
 
 		createButtons();
 	} else if (p2Score >= 15) {
-		console.log('p1 wins the game');
+		console.log('p2 wins the game');
 		p1Listener = false;
 		p2Listener = false;
 
@@ -179,6 +180,7 @@ function createButtons() {
 // - Bold winning hand pts value, flash Winner's hand button
 function flashWinningP(winningHand, losingHand, handScore) {
 	handScore.style.fontWeight = 900;
+	setTimeout(function() { audioWin.play(); }, 333);
 
 	winningHand.classList.remove('disabled');
 	winningHand.classList.add('btn-success');
