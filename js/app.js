@@ -106,7 +106,7 @@ function shakeHands() {
 		audio.play();
 	}, 666);
 	setTimeout(function() { 
-		for (let i = 0; i < 6; i++) {
+		for (let i = 0; i < 3; i++) {
 			document.querySelectorAll('img')[i].style.animation = '';
 		}
 	}, 1000);
@@ -136,6 +136,23 @@ function disableTwo() {
 		console.log('p1 finished first');
 		scoreRound();
 	}
+}
+
+// - Create Back & Reset buttons
+function createButtons () {
+	var resetButtons = document.getElementById('reset-buttons');
+	var resetBtn = document.createElement('button');
+	var backBtn = document.createElement('button');
+	resetBtn.classList.add('btn-success');
+	resetBtn.classList.add('btn-lg');
+	resetBtn.classList.add('btn');
+	backBtn.classList.add('btn-success');
+	backBtn.classList.add('btn-lg');
+	backBtn.classList.add('btn');
+
+	// - Attach to col-2 div and listen for clicks
+	resetBtn.addEventListener('click', 'game.html');
+	backBtn.addEventListener('click', );
 }
 
 
