@@ -295,6 +295,8 @@ function flashWinningP(winningHand, losingHand, handScore) {
 	setTimeout(function() {
 		winningHand.classList.remove('btn-success');
 		losingHand.classList.remove('btn-danger');
+		winningHand.classList.add('disabled');
+		losingHand.classList.add('disabled');
 	}, 2500)
 }
 
