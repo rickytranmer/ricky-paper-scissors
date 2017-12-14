@@ -1,5 +1,7 @@
 console.log('JS works');
 
+let audio = new Audio('audio/Slap.mp3'); //http://soundbible.com/2047-Banana-Slap.html
+
 var p1Score = 0;
 var p2Score = 0;
 var rounds = -1;
@@ -114,20 +116,20 @@ function randomPoints() {
 // - Shake hands, show round is starting
 function shakeHands() {
 	document.querySelectorAll('img')[0].style.animation = 'shake .33s';
-	var audio = new Audio('audio/Slap.mp3'); //http://soundbible.com/2047-Banana-Slap.html
+	audio = new Audio('audio/Slap.mp3'); //http://soundbible.com/2047-Banana-Slap.html
 	audio.play();
 	document.querySelectorAll('img')[3].style.animation = 'shake .33s';
 
 	setTimeout(function() {
 		document.querySelectorAll('img')[1].style.animation = 'shake .33s';
-		let audio = new Audio('audio/Slap.mp3');
+		audio = new Audio('audio/Slap.mp3');
 		audio.play();
 	}, 333);
 	setTimeout(function() { document.querySelectorAll('img')[4].style.animation = 'shake .33s'; }, 333);
 	
 	setTimeout(function() {
 		document.querySelectorAll('img')[2].style.animation = 'shake .33s';
-		var audio = new Audio('audio/Slap.mp3');
+		audio = new Audio('audio/Slap.mp3');
 		audio.play();
 	}, 666);
 	setTimeout(function() { document.querySelectorAll('img')[5].style.animation = 'shake .33s'; }, 666);
@@ -346,5 +348,5 @@ twoScissors.addEventListener('click', function() {
 	}
 });
 
-
-setTimeout(function() { startRound(); }, 333);
+// - Start the game (after a short delay, and after audio loads)
+setTimeout(function() { audio.addEventListener("canplay", startRound()); }, 333);
