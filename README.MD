@@ -1,4 +1,4 @@
-# Rock, Paper, Scissors, Score!
+# RICKY // PAPER // SCISSORS
 
 ## A Twist on a Classic
 ## [PLAY ME](https://rickytranmer.github.io/wdi-project-1/index.html)
