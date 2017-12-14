@@ -74,6 +74,8 @@ function startRound() {
 		paperScoreP2.innerText = '1';
 		scisssorsScoreP2.innerText = 'WINS';
 		paperScoreP2.style.fontWeight = 900;
+
+		createButtons();
 	} else if (p2Score >= 15) {
 		console.log('p2 wins the game');
 		twoRock.classList.add('btn-success');
@@ -89,6 +91,8 @@ function startRound() {
 		paperScoreP2.innerText = '2';
 		scisssorsScoreP2.innerText = 'WINS';
 		paperScoreP2.style.fontWeight = 900;
+
+		createButtons();
 	} else {
 		//Rock, Paper, Scissors!
 		p1Listener = true;
