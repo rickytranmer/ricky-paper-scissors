@@ -201,7 +201,7 @@ function createButtons() {
 // - Bold winning hand pts value, flash Winner's hand button
 function flashWinningP(winningHand, losingHand, handScore) {
 	handScore.style.fontWeight = 900;
-	setTimeout(function() { audioWin.play(); }, 333);
+	setTimeout(function() { audioWin.play(); }, 250);
 
 	winningHand.classList.remove('disabled');
 	winningHand.classList.add('btn-success');

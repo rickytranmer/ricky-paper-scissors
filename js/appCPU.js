@@ -129,10 +129,6 @@ function disableOne() {
 }
 
 
-
-
-
-
 // - Decides CPU choice
 function cpuLogic() {
 	// - Decision making is based on random #1-6, selects one of the hand pts
@@ -272,7 +268,7 @@ function createButtons() {
 	// - Attach to col-2 div and listen for clicks
 	resetButtons.appendChild(backBtn);
 	resetButtons.appendChild(resetBtn);
-	resetBtn.addEventListener('click', function(){ window.location = 'game.html' });
+	resetBtn.addEventListener('click', function(){ window.location = 'vsCPU.html' });
 	backBtn.addEventListener('click', function(){ window.location = 'index.html' });
 }
 
@@ -280,7 +276,7 @@ function createButtons() {
 // - Bold winning hand pts value, flash Winner's hand button
 function flashWinningP(winningHand, losingHand, handScore) {
 	handScore.style.fontWeight = 900;
-	setTimeout(function() { audioWin.play(); }, 333);
+	setTimeout(function() { audioWin.play(); }, 250);
 
 	winningHand.classList.remove('disabled');
 	winningHand.classList.add('btn-success');
