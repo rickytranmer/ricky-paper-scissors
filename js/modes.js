@@ -21,15 +21,7 @@ function sharedGame() {
 	document.getElementById('separate-score').classList.remove('active');
 }
 
-document.getElementById('start-button').addEventListener("click", startTheGame);
-
+// - Click listeners
+document.querySelector('.go-button').addEventListener("click", startTheGame);
 document.getElementById('separate-score').addEventListener("click", separateGame);
 document.getElementById('shared-score').addEventListener("click", sharedGame);
-
-//TODO - Add event listeners for each button to change gameMode
-//TODO										 to add/remove 'active' class
-
-//BRAINSTORM
-//sound effects / change sound effects?
-//change points required to win
-//input name

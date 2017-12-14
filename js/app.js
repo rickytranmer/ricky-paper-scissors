@@ -106,9 +106,9 @@ function shakeHands() {
 		audio.play();
 	}, 666);
 	setTimeout(function() { 
-		document.querySelectorAll('img')[0].style.animation = '';
-		document.querySelectorAll('img')[1].style.animation = '';
-		document.querySelectorAll('img')[2].style.animation = '';
+		for (let i = 0; i < 6; i++) {
+			document.querySelectorAll('img')[i].style.animation = '';
+		}
 	}, 1000);
 }
 

@@ -115,34 +115,29 @@ function randomPoints() {
 
 // - Shake hands, show round is starting
 function shakeHands() {
+	audio = new Audio('audio/Slap.mp3');
 	document.querySelectorAll('img')[0].style.animation = 'shake .33s';
-	audio = new Audio('audio/Slap.mp3'); //http://soundbible.com/2047-Banana-Slap.html
-	audio.play();
 	document.querySelectorAll('img')[3].style.animation = 'shake .33s';
+	audio.play();
 
 	setTimeout(function() {
-		document.querySelectorAll('img')[1].style.animation = 'shake .33s';
 		audio = new Audio('audio/Slap.mp3');
+		document.querySelectorAll('img')[1].style.animation = 'shake .33s';
+		document.querySelectorAll('img')[4].style.animation = 'shake .33s';
 		audio.play();
 	}, 333);
-	setTimeout(function() { document.querySelectorAll('img')[4].style.animation = 'shake .33s'; }, 333);
 	
 	setTimeout(function() {
-		document.querySelectorAll('img')[2].style.animation = 'shake .33s';
 		audio = new Audio('audio/Slap.mp3');
+		document.querySelectorAll('img')[2].style.animation = 'shake .33s';
+		document.querySelectorAll('img')[5].style.animation = 'shake .33s';
 		audio.play();
 	}, 666);
-	setTimeout(function() { document.querySelectorAll('img')[5].style.animation = 'shake .33s'; }, 666);
 	
 	setTimeout(function() { 
-		document.querySelectorAll('img')[0].style.animation = '';
-		document.querySelectorAll('img')[1].style.animation = '';
-		document.querySelectorAll('img')[2].style.animation = '';
-	}, 1000);
-	setTimeout(function() { 
-		document.querySelectorAll('img')[3].style.animation = '';
-		document.querySelectorAll('img')[4].style.animation = '';
-		document.querySelectorAll('img')[5].style.animation = '';
+		for (let i = 0; i < 6; i++) {
+			document.querySelectorAll('img')[i].style.animation = '';
+		}
 	}, 1000);
 }
 
