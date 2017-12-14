@@ -117,21 +117,21 @@ function randomPoints() {
 // - Shake hands, show round is starting
 function shakeHands() {
 	audio = new Audio('audio/Slap.mp3');
-	document.querySelectorAll('img')[0].style.animation = 'shake .33s';
-	document.querySelectorAll('img')[3].style.animation = 'shake .33s';
+	document.querySelectorAll('img')[0].style.animation = 'upDown .33s';
+	document.querySelectorAll('img')[3].style.animation = 'upDown .33s';
 	audio.play();
 
 	setTimeout(function() {
 		audio = new Audio('audio/Slap.mp3');
-		document.querySelectorAll('img')[1].style.animation = 'shake .33s';
-		document.querySelectorAll('img')[4].style.animation = 'shake .33s';
+		document.querySelectorAll('img')[1].style.animation = 'upDown .33s';
+		document.querySelectorAll('img')[4].style.animation = 'upDown .33s';
 		audio.play();
 	}, 333);
 	
 	setTimeout(function() {
 		audio = new Audio('audio/Slap.mp3');
-		document.querySelectorAll('img')[2].style.animation = 'shake .33s';
-		document.querySelectorAll('img')[5].style.animation = 'shake .33s';
+		document.querySelectorAll('img')[2].style.animation = 'upDown .33s';
+		document.querySelectorAll('img')[5].style.animation = 'upDown .33s';
 		audio.play();
 	}, 666);
 	

@@ -103,16 +103,16 @@ function randomPoints() {
 
 // - Shake hands, show round is starting
 function shakeHands() {
-	document.querySelectorAll('img')[0].style.animation = 'shake .33s';
+	document.querySelectorAll('img')[0].style.animation = 'upDown .33s';
 	audio = new Audio('audio/Slap.mp3');
 	audio.play();
 	setTimeout(function() {
-		document.querySelectorAll('img')[1].style.animation = 'shake .33s';
+		document.querySelectorAll('img')[1].style.animation = 'upDown .33s';
 		audio = new Audio('audio/Slap.mp3');
 		audio.play();
 	}, 333);
 	setTimeout(function() {
-		document.querySelectorAll('img')[2].style.animation = 'shake .33s';
+		document.querySelectorAll('img')[2].style.animation = 'upDown .33s';
 		audio = new Audio('audio/Slap.mp3');
 		audio.play();
 	}, 666);
