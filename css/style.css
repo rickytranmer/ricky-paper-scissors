@@ -35,7 +35,7 @@ img {
 
 #two-player, #vs-cpu, #separate-score, #shared-score  {
 	padding: 35px;	
-	margin: 2px auto;
+	margin: 10px auto;
 }
 #start-button {
 	font-size: 2rem;
