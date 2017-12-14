@@ -87,9 +87,9 @@ function startRound() {
 
 // - Shake hands, show pts, show round is starting
 function shakeHands() {
-	rockScore = Math.floor((Math.random() * 5) + 1);
-	paperScore = Math.floor((Math.random() * 5) + 1);
-	scissorsScore = Math.floor((Math.random() * 5) + 1);
+	rockScore = Math.floor((Math.random() * 6) + 1);
+	paperScore = Math.floor((Math.random() * 6) + 1);
+	scissorsScore = Math.floor((Math.random() * 6) + 1);
 	console.log(rockScore + ' ' + paperScore + ' ' + scissorsScore);
 
 	document.querySelectorAll('img')[0].style.animation = 'upDown .33s';

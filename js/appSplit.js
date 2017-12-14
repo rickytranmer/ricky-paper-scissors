@@ -99,12 +99,12 @@ function startRound() {
 
 // - Shake hands, show pts, show round is starting
 function shakeHands() {
-	rockScore1 = Math.floor((Math.random() * 5) + 1);
-	paperScore1 = Math.floor((Math.random() * 5) + 1);
-	scissorsScore1 = Math.floor((Math.random() * 5) + 1);
-	rockScore2 = Math.floor((Math.random() * 5) + 1);
-	paperScore2 = Math.floor((Math.random() * 5) + 1);
-	scissorsScore2 = Math.floor((Math.random() * 5) + 1);
+	rockScore1 = Math.floor((Math.random() * 6) + 1);
+	paperScore1 = Math.floor((Math.random() * 6) + 1);
+	scissorsScore1 = Math.floor((Math.random() * 6) + 1);
+	rockScore2 = Math.floor((Math.random() * 6) + 1);
+	paperScore2 = Math.floor((Math.random() * 6) + 1);
+	scissorsScore2 = Math.floor((Math.random() * 6) + 1);
 	audio = new Audio('audio/Slap.mp3');
 	
 	document.querySelectorAll('img')[0].style.animation = 'upDown .33s';
