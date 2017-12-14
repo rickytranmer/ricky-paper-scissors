@@ -45,9 +45,6 @@ function startRound() {
 	oneRock.classList.remove('disabled');
 	onePaper.classList.remove('disabled');
 	oneScissors.classList.remove('disabled');
-	twoRock.classList.remove('disabled');
-	twoPaper.classList.remove('disabled');
-	twoScissors.classList.remove('disabled');
 
 	// - Check if winner - else play!
 	if (p1Score >= 15) {
@@ -66,7 +63,7 @@ function startRound() {
 
 		createButtons();
 	} else if (p2Score >= 15) {
-		console.log('p1 wins the game');
+		console.log('CPU wins the game');
 		p1Listener = false;
 		p2Listener = false;
 
@@ -74,8 +71,8 @@ function startRound() {
 		twoPaper.classList.add('btn-success');
 		twoScissors.classList.add('btn-success');
 
-		rockScoreP.innerText = 'PLAYER';
-		paperScoreP.innerText = '2';
+		rockScoreP.innerText = 'COMPUTER';
+		paperScoreP.innerText = 'PLAYER';
 		scisssorsScoreP.innerText = 'WINS';
 		paperScoreP.style.fontWeight = 900;
 
@@ -83,7 +80,6 @@ function startRound() {
 	} else {
 		//Rock, Paper, Scissors!
 		p1Listener = true;
-		p2Listener = true;
 		randomPoints();
 		shakeHands();
 	}
@@ -128,25 +124,132 @@ function disableOne() {
 	onePaper.classList.add('disabled');
 	oneScissors.classList.add('disabled');
 	p1Listener = false;
-
-	if (!p2Listener) {
-		console.log('p2 finished first');
-		scoreRound();
-	}
+	cpuLogic();
 }
 
-// - Disable p2 inputs, score if p1 ready
-function disableTwo() {
-	twoRock.classList.add('disabled');
-	twoPaper.classList.add('disabled');
-	twoScissors.classList.add('disabled');
-	p2Listener = false;
 
-	if (!p1Listener) {
-		console.log('p1 finished first');
-		scoreRound();
+
+
+
+
+// - Decides CPU choice
+function cpuLogic() {
+	// - Decision making is based on random #1-6, selects one of the hand pts
+	var logicNum = Math.floor(Math.random() * 3);
+	var lowPts, midPts, highPts;
+
+	if ((rockScore >= paperScore) && (rockScore >= scissorsScore)) {
+		highPts = rockScore;
+		p2Choice = 'i';
+		if (paperScore >= scissorsScore) {
+			midPts = paperScore;
+			lowPts = scissorsScore;
+		} else {
+			lowPts = paperScore;
+			midPts = scissorsScore;
+		}
+	} else if ((paperScore >= rockScore) && (paperScore >= scissorsScore)) {
+		highPts = paperScore;
+		p2Choice = 'o';
+
+		if (rockScore >= scissorsScore) {
+			midPts = rockScore;
+			lowPts = scissorsScore;
+		} else {
+			lowPts = rockScore;
+			midPts = scissorsScore;
+		}
+	} else if ((scissorsScore >= rockScore) && (scissorsScore >= paperScore)) {
+		highPts = scissorsScore;
+		p2Choice = 'p';
+
+		if (rockScore >= paperScore) {
+			midPts = rockScore;
+			lowPts = paperScore;
+		} else {
+			lowPts = rockScore;
+			midPts = paperScore;
+		}
 	}
+	console.log(lowPts + ' ' + midPts + ' ' + highPts + ' ' + p2Choice);
+
+	switch (logicNum) {
+		case 0:
+			logicNum = rockScore;
+			break;
+		case 1:
+			logicNum = paperScore;
+			break;
+		case 2:
+			logicNum = scissorsScore;
+			break;
+	}
+	console.log('logicNum ' + logicNum);
+
+
+	switch (logicNum) {
+		case 1: 	// - Automatically lose
+			if (p1Choice == 'q') {
+				p2Choice = 'p';
+			} else if (p1Choice == 'w') {
+				p2Choice = 'i';
+			} else {
+				p2Choice = 'o';
+			}
+			break;
+		case 2: 	// - Goes for lowest points
+			if (lowPts == rockScore) {
+				p2Choice = 'i';
+			} else if (lowPts == paperScore) {
+				p2Choice = 'o';
+			} else {
+				p2Choice = 'p';
+			}
+			break;
+		case 3: 	// - Goes for median points
+			if (midPts == rockScore) {
+				p2Choice = 'i';
+			} else if (midPts == paperScore) {
+				p2Choice = 'o';
+			} else {
+				p2Choice = 'p';
+			}
+			break;
+		case 4: 	// - Goes for highest points
+			if (highPts == rockScore) {
+				p2Choice = 'i';
+			} else if (highPts == paperScore) {
+				p2Choice = 'o';
+			} else {
+				p2Choice = 'p';
+			}
+			break;
+		case 5: 	// - Goes for hand that beats highest
+			if (highPts == rockScore) {
+				p2Choice = 'o';
+			} else if (highPts == paperScore) {
+				p2Choice = 'p';
+			} else {
+				p2Choice = 'i';
+			}
+			break;
+		case 6: 	// - Automatically win
+			if (p1Choice == 'q') {
+				p2Choice = 'o';
+			} else if (p1Choice == 'w') {
+				p2Choice = 'p';
+			} else {
+				p2Choice = 'i';
+			}
+			break;
+	}
+
+	scoreRound();
 }
+
+
+
+
 
 // - Create Back & Reset buttons
 function createButtons() {
@@ -208,7 +311,10 @@ function flashTie(p1Hand, p2Hand) {
 	setTimeout(function() { p1Hand.classList.add('btn-outline-secondary'); }, 500);
 	setTimeout(function() { p1Hand.classList.remove('btn-outline-secondary'); }, 1000);
 	setTimeout(function() { p2Hand.classList.add('btn-outline-secondary'); }, 500);
-	setTimeout(function() { p2Hand.classList.remove('btn-outline-secondary'); }, 1000);
+	setTimeout(function() {
+		p2Hand.classList.remove('btn-outline-secondary');
+		p2Hand.classList.add('disabled');
+	}, 1000);
 }
 
 // - Determine winner, apply points
@@ -269,27 +375,9 @@ document.addEventListener('keyup', function(event) {
 				break;
 		}
 	}
-
-	if ( p2Listener && ((keyName == 'i') || (keyName == 'o') || (keyName == 'p')) ) {
-		console.log(keyName + ' pressed');
-		switch (keyName) {
-			case 'i':
-			case 'o':
-			case 'p':
-				p2Choice = keyName;
-				disableTwo();
-				break;
-		}
-	}
-	if ((p1Choice) || (p2Choice)) {
-		console.log(p1Choice + ' ' + p2Choice);
-	} else {
-		console.log('invalid input (caps lock?)');
-	}
 });
 
 // - Click Listeners
-	// Player 1
 oneRock.addEventListener('click', function() {
 	if (p1Listener) {
 		p1Choice = 'q';
@@ -309,25 +397,6 @@ oneScissors.addEventListener('click', function() {
 	}
 });
 
-	// Player 2
-twoRock.addEventListener('click', function() {
-	if (p2Listener) {
-		p2Choice = 'i';
-		disableTwo();
-	}
-});
-twoPaper.addEventListener('click', function() {
-	if (p2Listener) {
-		p2Choice = 'o';
-		disableTwo();
-	} 
-});
-twoScissors.addEventListener('click', function() {
-	if (p2Listener) {
-		p2Choice = 'p';
-		disableTwo();
-	}
-});
 
 // - Start the game (after a short delay, and after audio loads)
 setTimeout(function() { audio.addEventListener("canplay", startRound()); }, 333);
