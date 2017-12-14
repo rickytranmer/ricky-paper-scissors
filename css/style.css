@@ -32,6 +32,13 @@ img {
 .scores {
 	font-size: 1.5rem;
 }
+.bigger-text {
+	font-size: 2.4rem;
+	font-weight: bold;
+}
+.btn-secondary:not([disabled]):not(.disabled).active, .btn-secondary:not([disabled]):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
+	box-shadow: 0 0 0 0.5rem rgba(134,142,150,.5);
+}
 
 #two-player, #vs-cpu, #separate-score, #shared-score  {
 	padding: 35px;	
@@ -39,10 +46,6 @@ img {
 }
 #start-button {
 	font-size: 2rem;
-}
-.bigger-text {
-	font-size: 2.4rem;
-	font-weight: bold;
 }
 
 @keyframes shake {
