@@ -81,34 +81,30 @@ function startRound() {
 	} else {
 		//Rock, Paper, Scissors!
 		p1Listener = true;
-		randomPoints();
 		shakeHands();
 	}
 }
 
-// - Store 3 randoms in 3 score display <p>'s & 3 variables
-function randomPoints() {
+// - Shake hands, show pts, show round is starting
+function shakeHands() {
 	rockScore = Math.floor((Math.random() * 5) + 1);
 	paperScore = Math.floor((Math.random() * 5) + 1);
 	scissorsScore = Math.floor((Math.random() * 5) + 1);
 	console.log(rockScore + ' ' + paperScore + ' ' + scissorsScore);
-	rockScoreP.innerText = rockScore + 'pts';
-	paperScoreP.innerText = paperScore + 'pts';
-	scisssorsScoreP.innerText = scissorsScore + 'pts';
-}
 
-// - Shake hands, show round is starting
-function shakeHands() {
 	document.querySelectorAll('img')[0].style.animation = 'upDown .33s';
+	rockScoreP.innerText = rockScore + 'pts';
 	audio = new Audio('audio/Slap.mp3');
 	audio.play();
 	setTimeout(function() {
 		document.querySelectorAll('img')[1].style.animation = 'upDown .33s';
+		paperScoreP.innerText = paperScore + 'pts';
 		audio = new Audio('audio/Slap.mp3');
 		audio.play();
 	}, 333);
 	setTimeout(function() {
 		document.querySelectorAll('img')[2].style.animation = 'upDown .33s';
+		scisssorsScoreP.innerText = scissorsScore + 'pts';
 		audio = new Audio('audio/Slap.mp3');
 		audio.play();
 	}, 666);

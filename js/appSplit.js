@@ -93,48 +93,42 @@ function startRound() {
 		//Rock, Paper, Scissors!
 		p1Listener = true;
 		p2Listener = true;
-		randomPoints();
 		shakeHands();
 	}
 }
 
-// - Store 3 randoms in 3 score display <p>'s & 3 variables
-function randomPoints() {
+// - Shake hands, show pts, show round is starting
+function shakeHands() {
 	rockScore1 = Math.floor((Math.random() * 5) + 1);
 	paperScore1 = Math.floor((Math.random() * 5) + 1);
 	scissorsScore1 = Math.floor((Math.random() * 5) + 1);
 	rockScore2 = Math.floor((Math.random() * 5) + 1);
 	paperScore2 = Math.floor((Math.random() * 5) + 1);
 	scissorsScore2 = Math.floor((Math.random() * 5) + 1);
-	rockScoreP1.innerText = rockScore1 + 'pts';
-	paperScoreP1.innerText = paperScore1 + 'pts';
-	scisssorsScoreP1.innerText = scissorsScore1 + 'pts';
-	rockScoreP2.innerText = rockScore2 + 'pts';
-	paperScoreP2.innerText = paperScore2 + 'pts';
-	scisssorsScoreP2.innerText = scissorsScore2 + 'pts';
-}
-
-// - Shake hands, show round is starting
-function shakeHands() {
 	audio = new Audio('audio/Slap.mp3');
+	
 	document.querySelectorAll('img')[0].style.animation = 'upDown .33s';
 	document.querySelectorAll('img')[3].style.animation = 'upDown .33s';
+	rockScoreP1.innerText = rockScore1 + 'pts';
+	rockScoreP2.innerText = rockScore2 + 'pts';
 	audio.play();
 
 	setTimeout(function() {
 		audio = new Audio('audio/Slap.mp3');
 		document.querySelectorAll('img')[1].style.animation = 'upDown .33s';
 		document.querySelectorAll('img')[4].style.animation = 'upDown .33s';
+		paperScoreP1.innerText = paperScore1 + 'pts';
+		paperScoreP2.innerText = paperScore2 + 'pts';
 		audio.play();
 	}, 333);
-	
 	setTimeout(function() {
 		audio = new Audio('audio/Slap.mp3');
 		document.querySelectorAll('img')[2].style.animation = 'upDown .33s';
 		document.querySelectorAll('img')[5].style.animation = 'upDown .33s';
+		scisssorsScoreP1.innerText = scissorsScore1 + 'pts';
+		scisssorsScoreP2.innerText = scissorsScore2 + 'pts';
 		audio.play();
 	}, 666);
-	
 	setTimeout(function() { 
 		for (let i = 0; i < 6; i++) {
 			document.querySelectorAll('img')[i].style.animation = '';
