@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>RICKY // PAPER // SCISSORS</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/mononoki" type="text/css"/>
+</head>
+<body>
+	<div class="container">
+		<header>
+			<h1>RICKY // PAPER // SCISSORS!</h1>
+			<h3>by Ricky Tranmer</h3>
+			<div class="jumbotron">
+				<div class="row">
+<!-- Display score and game count -->
+					<div class="col-6">
+						<h4>SCORE</h4>
+						<p id="score-text"><span class="bigger-text">0</span> vs <span class="bigger-text">0</span></p>
+					</div>
+					<div class="col-6">
+						<h4>ROUND</h4>
+						<p id="round-text" class="bigger-text">0</p>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<main>			
+			<section class="row">
+				<div class="player-one col-lg-5 col-md-12 jumbotron">
+					<h4>PLAYER 1</h4>
+					<div class="row">
+						<div class="col-4"><img src="images/rock.png" alt="rock"></div>
+						<div class="col-4"><img src="images/paper.png" alt="paper"></div>
+						<div class="col-4"><img src="images/scissors.png" alt="scissors"></div>
+					</div>
+					<div class="row">
+						<p id="rock-score1" class="scores col-4">0pts</p>
+						<p id="paper-score1" class="scores col-4">0pts</p>
+						<p id="scissors-score1" class="scores col-4">0pts</p>
+					</div>
+					<div class="row">
+						<div class="col-4"><p id="one-rock" class="btn-secondary btn btn-lg btn-hand">Rock</p></div>
+						<div class="col-4"><p id="one-paper" class="btn-secondary btn btn-lg btn-hand">Paper</p></div>
+						<div class="col-4"><p id="one-scissors" class="btn-secondary btn btn-lg btn-hand">Scissors</p></div>
+					</div>
+<!-- Show button inputs for Player 1 -->
+					<div class="row">
+						<p class="col-4 bigger-text">Q</p>
+						<p class="col-4 bigger-text">W</p>
+						<p class="col-4 bigger-text">E</p>
+					</div>
+				</div>
+			
+<!-- Divider column -->
+				<div id="reset-buttons" class="col-md-2 col-sm-12"></div>
+				
+				<div class="player-two col-lg-5 col-md-12 jumbotron">
+					<h4>COMPUTER</h4>
+					<div class="row">
+						<div class="col-4"><img src="images/rock.png" alt="rock"></div>
+						<div class="col-4"><img src="images/paper.png" alt="paper"></div>
+						<div class="col-4"><img src="images/scissors.png" alt="scissors"></div>
+					</div>
+					<div class="row">
+						<p id="rock-score2" class="scores col-4">0pts</p>
+						<p id="paper-score2" class="scores col-4">0pts</p>
+						<p id="scissors-score2" class="scores col-4">0pts</p>
+					</div>
+					<div class="row">
+						<div class="col-4"><p id="two-rock" class="btn-secondary btn btn-lg btn-hand disabled">Rock</p></div>
+						<div class="col-4"><p id="two-paper" class="btn-secondary btn btn-lg btn-hand disabled">Paper</p></div>
+						<div class="col-4"><p id="two-scissors" class="btn-secondary btn btn-lg btn-hand disabled">Scissors</p></div>
+					</div>
+<!-- Show button inputs for Player 2 -->
+					<div class="row">
+						<p class="col-4 bigger-text">C</p>
+						<p class="col-4 bigger-text">P</p>
+						<p class="col-4 bigger-text">U</p>
+					</div>
+				</div>
+			</section>
+		</main>
+	</div>
+
+	<script type="text/javascript" src="js/appCPUsplit.js"></script>
+</body>
+</html>

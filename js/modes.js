@@ -8,16 +8,16 @@ function startTheGame() {
 }
 
 function separateGame() {
-	//TODO - Check if 2player/CPU (if I make a separate score CPU mode)
-	gameMode = 'gameSplit.html'
+	if (document.getElementById('two-player').classList.contains('active')) {
+		gameMode = 'gameSplit.html';
+	} else {
+		gameMode = 'vsCPUsplit.html';
+	}
 	document.getElementById('separate-score').classList.add('active');
 	document.getElementById('shared-score').classList.remove('active');
-	document.getElementById('two-player').classList.add('active');
-	document.getElementById('vs-cpu').classList.remove('active');
 }
 
 function sharedGame() {
-	// - Check if 2player/CPU
 	if (document.getElementById('two-player').classList.contains('active')) {
 		gameMode = 'game.html';
 	} else {
@@ -28,18 +28,24 @@ function sharedGame() {
 }
 
 function cpuGame() {
-	gameMode = 'vsCPU.html';
-	document.getElementById('shared-score').classList.add('active');
-	document.getElementById('separate-score').classList.remove('active');
+	if (document.getElementById('shared-score').classList.contains('active')) {
+		gameMode = 'vsCPU.html';
+	} else {
+		gameMode = 'vsCPUsplit.html';
+	}
 	document.getElementById('vs-cpu').classList.add('active');
 	document.getElementById('two-player').classList.remove('active');
 
 }
 
 function twoGame() {
-	gameMode = 'game.html';
-	document.getElementById('two-player').classList.add('active');
-	document.getElementById('vs-cpu').classList.remove('active');
+	if (document.getElementById('shared-score').classList.contains('active')) {
+		gameMode = 'game.html';
+	} else {
+		gameMode = 'gameSplit.html';
+	}
+	document.getElementById('vs-cpu').classList.add('active');
+	document.getElementById('two-player').classList.remove('active');
 }
 
 // - Click listeners

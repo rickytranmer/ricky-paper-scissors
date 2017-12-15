@@ -5,7 +5,7 @@ var audioWin = new Audio('audio/Whpsh.m4a');
 
 var p1Score = 0;
 var p2Score = 0;
-var rounds = -1;
+var rounds = 0;
 var p1Choice = '';
 var p2Choice = '';
 var p1Listener = false;
