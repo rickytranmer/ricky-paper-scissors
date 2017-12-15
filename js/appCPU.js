@@ -3,6 +3,7 @@ console.log('JS works');
 var audio = new Audio('audio/Slap.mp3');
 var audioWin = new Audio('audio/Whpsh.m4a');
 var audioLose = new Audio('audio/screech.mp3');
+var audioWinGame = new Audio('audio/ohyeah.wav');
 
 var p1Score = 0;
 var p2Score = 0;
@@ -53,6 +54,7 @@ function startRound() {
 	// - Check if winner - else play!
 	if (p1Score >= 15) {
 		console.log('p1 wins the game');
+		audioWinGame.play();
 		p1Listener = false;
 
 		oneRock.classList.add('btn-success');

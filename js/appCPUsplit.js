@@ -3,6 +3,7 @@ console.log('JS works');
 var audio = new Audio('audio/Slap.mp3'); //http://soundbible.com/2047-Banana-Slap.html
 var audioWin = new Audio('audio/Whpsh.m4a');
 var audioLose = new Audio('audio/screech.mp3');
+var audioWinGame = new Audio('audio/ohyeah.wav');
 
 var p1Score = 0;
 var p2Score = 0;
@@ -64,6 +65,7 @@ function startRound() {
 		oneRock.classList.add('btn-success');
 		onePaper.classList.add('btn-success');
 		oneScissors.classList.add('btn-success');
+		audioWinGame.play();
 		p1Listener = false;
 
 		rockScoreP1.innerText = 'PLAYER';
@@ -182,58 +184,18 @@ function cpuLogic() {
 	console.log('logicNum ' + logicNum);
 
 	if ((rockScore1 >= paperScore1) && (rockScore1 >= scissorsScore1)) {
-		highPts1 = rockScore1;		if (paperScore1 >= scissorsScore1) {
-			midPts1 = paperScore1;
-			lowPts1 = scissorsScore1;
-		} else {
-			lowPts1 = paperScore1;
-			midPts1 = scissorsScore1;
-		}
+		highPts1 = rockScore1;
 	} else if ((paperScore1 >= rockScore1) && (paperScore1 >= scissorsScore1)) {
 		highPts1 = paperScore1;
-		if (rockScore1 >= scissorsScore1) {
-			midPts1 = rockScore1;
-			lowPts1 = scissorsScore1;
-		} else {
-			lowPts1 = rockScore1;
-			midPts1 = scissorsScore1;
-		}
 	} else if ((scissorsScore1 >= rockScore1) && (scissorsScore1 >= paperScore1)) {
 		highPts1 = scissorsScore1;
-		if (rockScore1 >= paperScore1) {
-			midPts1 = rockScore1;
-			lowPts1 = paperScore1;
-		} else {
-			lowPts1 = rockScore1;
-			midPts1 = paperScore1;
-		}
 	}
 	if ((rockScore2 >= paperScore2) && (rockScore2 >= scissorsScore2)) {
-		highPts2 = rockScore2;		if (paperScore2 >= scissorsScore2) {
-			midPts2 = paperScore2;
-			lowPts2 = scissorsScore2;
-		} else {
-			lowPts2 = paperScore2;
-			midPts2 = scissorsScore2;
-		}
+		highPts2 = rockScore2;
 	} else if ((paperScore2 >= rockScore2) && (paperScore2 >= scissorsScore2)) {
 		highPts2 = paperScore2;
-		if (rockScore2 >= scissorsScore2) {
-			midPts2 = rockScore2;
-			lowPts2 = scissorsScore2;
-		} else {
-			lowPts2 = rockScore2;
-			midPts2 = scissorsScore2;
-		}
 	} else if ((scissorsScore2 >= rockScore2) && (scissorsScore2 >= paperScore2)) {
 		highPts2 = scissorsScore2;
-		if (rockScore2 >= paperScore2) {
-			midPts2 = rockScore2;
-			lowPts2 = paperScore2;
-		} else {
-			lowPts2 = rockScore2;
-			midPts2 = paperScore2;
-		}
 	}
 
 	switch (logicNum) {
