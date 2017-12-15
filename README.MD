@@ -29,4 +29,4 @@ Rather than choose a random hand, the CPU will base it's decision on the point v
 	- 3) go for the median pts
 	- 4) go for the highest pts
 	- 5) go for the hand that beats the highest pts
-	- 6) automatically lose
+	- 6) automatically win
