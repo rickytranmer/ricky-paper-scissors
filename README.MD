@@ -22,7 +22,7 @@ I came up with the idea for this game while trying to think of simplifying the f
 
 ### CPU Logic
 
-- Rather than choose a random hand, the CPU will base it's decision on the point values available.  It selecets one of the point values to determine which 'logicNum' to use.  You can use this tiny bit of information to choose the best hand each round.
+Rather than choose a random hand, the CPU will base it's decision on the point values available.  It selecets one of the point values to determine which 'logicNum' to use.  You can use this tiny bit of information to choose the best hand each round.
 
 	- 1) automatically lose
 	- 2) go for the lowest pts
