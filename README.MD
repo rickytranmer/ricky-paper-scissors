@@ -25,16 +25,25 @@ I came up with the idea for this game while trying to think of simplifying the f
 Rather than choose a random hand, the CPU will base it's decision on the point values available.  It selecets one of the point values to determine which 'logicNum' to use.  You can use this tiny bit of information to choose the best hand each round.
 
 - Shared Score Logic
-	- 1) automatically lose
-	- 2) go for the lowest pts
-	- 3) go for the median pts
-	- 4) go for the highest pts
-	- 5) go for the hand that beats the highest pts
-	- 6) automatically win
+	- #1 automatically lose
+	- #2 go for the lowest pts
+	- #3 go for the median pts
+	- #4 go for the highest pts
+	- #5 go for the hand that beats the highest pts
+	- #6 automatically win
 - Separate Score Logic
-	- 1) automatically lose
-	- 2) go for p1's highest pts
-	- 3) go for cpu's highest pts
-	- 4) beat p1's highest pts
-	- 5) beat cpu's highest pts
-	- 6) automatically win
+	- #1 automatically lose
+	- #2 go for p1's highest pts
+	- #3 go for cpu's highest pts
+	- #4 beat p1's highest pts
+	- #5 beat cpu's highest pts
+	- #6 automatically win
+
+### TODO
+
+- condense variables into objects using constructors
+- DRY out functions, move into main.js that every page will load, then use their individual js files
+- add mute audio button to header
+- add alt paths for images
+- think of new modes
+- add sounds, images, animations on certain conditions
