@@ -44,8 +44,8 @@ function twoGame() {
 	} else {
 		gameMode = 'gameSplit.html';
 	}
-	document.getElementById('vs-cpu').classList.add('active');
-	document.getElementById('two-player').classList.remove('active');
+	document.getElementById('vs-cpu').classList.remove('active');
+	document.getElementById('two-player').classList.add('active');
 }
 
 // - Click listeners
