@@ -17,6 +17,9 @@ img {
 	height: auto;
 	max-width: 15vw;
 }
+h1:hover, h3:hover {
+	color: #FFDC00;
+}
 
 .jumbotron {
 	padding: .25rem 1rem;
