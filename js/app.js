@@ -177,7 +177,7 @@ function shakeHands() {
 	// - Shake animation for each hand img over period of 1 sec
 	for (let i = 0; i < 3; i++) {
 		setTimeout(function() {
-			display.elements.all[i].innerText = display.score.all[i] + 'pts';
+			display.elements.all[i].innerText = display.score.all[i];
 			document.querySelectorAll('img')[i].style.animation = 'upDown .33s';
 			audioSlap();
 		}, i*333);

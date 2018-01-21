@@ -24,13 +24,14 @@ h1:hover, h3:hover {
 .jumbotron {
 	padding: .25rem 1rem;
 	text-align: center;
-	margin-bottom: 10px;
+	margin-bottom: 2vh;
 }
 .centerMe {
 	text-align: center;
 }
 .btn-hand {
 	padding: 1rem .5rem;
+	margin-bottom: 1vh;
 }
 .scores {
 	font-size: 1.5rem;
@@ -38,9 +39,13 @@ h1:hover, h3:hover {
 .bigger-text {
 	font-size: 2.4rem;
 	font-weight: bold;
+	margin-bottom: 1vh;
 }
 .btn-secondary:not([disabled]):not(.disabled).active, .btn-secondary:not([disabled]):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
 	box-shadow: 0 0 0 0.5rem rgba(134,142,150,.5);
+}
+.player-two {
+	margin-bottom: 0vh;
 }
 
 #two-player, #vs-cpu, #separate-score, #shared-score  {
@@ -49,6 +54,10 @@ h1:hover, h3:hover {
 }
 #start-button {
 	font-size: 2rem;
+}
+#paper-score, #rock-score, #scissors-score {
+	font-size: 2.5rem;
+	margin-bottom: 1vh;
 }
 
 @keyframes upDown {
