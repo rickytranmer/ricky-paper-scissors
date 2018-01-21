@@ -17,6 +17,7 @@ function Player(id) {
 	this.score = 0;
 	this.choice = '';
 	this.listener = false;
+	this.elements = {};
 }
 // - Player hand inputs
 function playerElements(thisPlayer) {
@@ -30,13 +31,10 @@ function playerElements(thisPlayer) {
 // - Counters & respective elements
 function Display() {
 	this.rounds = 0;
-	this.score = {
-		rock: 1,
-		paper: 1,
-		scissors: 1
-	};
+	this.score = { rock: 1, paper: 1, scissors: 1, all: [] };
 	this.elements = {};
 }
+// - Game info
 function displayElements(thisDisplay) {
 	thisDisplay.elements.score = document.getElementById('score-text');
 	thisDisplay.elements.round = document.getElementById('round-text');
@@ -44,6 +42,7 @@ function displayElements(thisDisplay) {
 	thisDisplay.elements.rock = document.getElementById('rock-score');
 	thisDisplay.elements.paper = document.getElementById('paper-score');
 	thisDisplay.elements.scissors = document.getElementById('scissors-score');
+	thisDisplay.elements.all = [ thisDisplay.elements.rock, thisDisplay.elements.paper, thisDisplay.elements.scissors ];
 
 	thisDisplay.audioWin = new Audio('audio/Whpsh.m4a');
 }
@@ -62,41 +61,19 @@ function startRound() {
 
 	// - Check if winner - else play!
 	if (p1.score >= 15) {
-		console.log('p1 wins the game');
-		p1.listener = false;
-		p2.listener = false;
-
-		p1.elements.rock.classList.add('btn-success');
-		p1.elements.paper.classList.add('btn-success');
-		p1.elements.scissors.classList.add('btn-success');
-
-		display.elements.rock.innerText = 'PLAYER';
-		display.elements.paper.innerText = '1';
-		display.elements.scissors.innerText = 'WINS';
-		display.elements.paper.style.fontWeight = 900;
-
-		createButtons();
+		gameWinner(p1);
 	} else if (p2.score >= 15) {
-		console.log('p2 wins the game');
-		p1.listener = false;
-		p2.listener = false;
-
-		p2.elements.rock.classList.add('btn-success');
-		p2.elements.paper.classList.add('btn-success');
-		p2.elements.scissors.classList.add('btn-success');
-
-		display.elements.rock.innerText = 'PLAYER';
-		display.elements.paper.innerText = '2';
-		display.elements.scissors.innerText = 'WINS';
-		display.elements.paper.style.fontWeight = 900;
-
-		createButtons();
+		gameWinner(p2);
 	} else {
-		//Rock, Paper, Scissors!
-		p1.listener = true;
-		p2.listener = true;
-		shakeHands();
+		// - Rock, Paper, Scissors!
+		setListeners(true);
 	}
+}
+
+function setListeners(bool) {
+	p1.listener = bool;
+	p2.listener = bool;
+	bool ? shakeHands() : createButtons();
 }
 
 function audioSlap() {
@@ -104,34 +81,36 @@ function audioSlap() {
 	display.audio.play();
 }
 
+function gameWinner(thisPlayer) {
+	console.log(`p${thisPlayer.id} wins the game`);
+	setListeners(false);
+	display.elements.rock.innerText = 'PLAYER';
+	display.elements.paper.innerText = thisPlayer.id;
+	display.elements.scissors.innerText = 'WINS';
+	display.elements.paper.style.fontWeight = 900;
+	thisPlayer.elements.rock.classList.add('btn-success');
+	thisPlayer.elements.paper.classList.add('btn-success');
+	thisPlayer.elements.scissors.classList.add('btn-success');
+}
+
 // - Shake hands, show pts, show round is starting
 function shakeHands() {
 	display.score.rock = Math.floor((Math.random() * 6) + 1);
 	display.score.paper = Math.floor((Math.random() * 6) + 1);
 	display.score.scissors = Math.floor((Math.random() * 6) + 1);
-	console.log(display.score.rock + ' ' + display.score.paper + ' ' + display.score.scissors);
+	display.score.all = [ display.score.rock, display.score.paper, display.score.scissors ];
+	console.log(display.score.all);
 
 	// - Shake animation for each hand img over period of 1 sec
-	document.querySelectorAll('img')[0].style.animation = 'upDown .33s';
-	display.elements.rock.innerText = display.score.rock + 'pts';
-	audioSlap();
-	setTimeout(function() {
-		document.querySelectorAll('img')[1].style.animation = 'upDown .33s';
-		display.elements.paper.innerText = display.score.paper + 'pts';
-		audioSlap();
-	}, 333);
-	setTimeout(function() {
-		document.querySelectorAll('img')[2].style.animation = 'upDown .33s';
-		display.elements.scissors.innerText = display.score.scissors + 'pts';
-		audioSlap();
-	}, 666);
-
-	// - Reset hand animation
-	setTimeout(function() { 
-		for (let i = 0; i < 3; i++) {
-			document.querySelectorAll('img')[i].style.animation = '';
-		}
-	}, 1000);
+	for (let i = 0; i < 3; i++) {
+		setTimeout(function() {
+			display.elements.all[i].innerText = display.score.all[i] + 'pts';
+			document.querySelectorAll('img')[i].style.animation = 'upDown .33s';
+			audioSlap();
+		}, i*333);
+		// - Reset hand animation
+		setTimeout(function() { document.querySelectorAll('img')[i].style.animation = '' }, 1000-(i*333));
+	}
 }
 
 // - Disable thisPlayer inputs, score if thatPlayer ready
@@ -197,7 +176,7 @@ function flashWinningP(winningHand, losingHand, handScore) {
 	setTimeout(function() {
 		winningHand.classList.remove('btn-success');
 		losingHand.classList.remove('btn-danger');
-	}, 2500)
+	}, 2500);
 }
 
 // - Both hands briefly flash
