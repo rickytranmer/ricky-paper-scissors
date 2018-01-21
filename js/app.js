@@ -28,11 +28,84 @@ function playerElements(thisPlayer) {
 	};
 }
 
-// - Counters & respective elements
+// - Counters, display elements, and event listeners
 function Display() {
 	this.rounds = 0;
 	this.score = { rock: 1, paper: 1, scissors: 1, all: [] };
 	this.elements = {};
+
+	// - Key press listener
+	document.addEventListener('keyup', function(event) {
+		const keyName = event.key;
+		if ( p1.listener && ((keyName == 'q') || (keyName == 'w') || (keyName == 'e')) ) {
+			console.log(keyName + ' pressed');
+			switch (keyName) {
+				case 'q':
+				case 'w':
+				case 'e':
+					p1.choice = keyName;
+					disablePlayer(p1, p2);
+					break;
+			}
+		}
+
+		if ( p2.listener && ((keyName == 'i') || (keyName == 'o') || (keyName == 'p')) ) {
+			console.log(keyName + ' pressed');
+			switch (keyName) {
+				case 'i':
+				case 'o':
+				case 'p':
+					p2.choice = keyName;
+					disablePlayer(p2, p1);
+					break;
+			}
+		}
+		if ((p1.choice) || (p2.choice)) {
+			console.log(p1.choice + ' ' + p2.choice);
+		} else {
+			console.log('invalid input (caps lock?)');
+		}
+	});
+
+	// - Player 1 button inputs
+	p1.elements.rock.addEventListener('click', function() {
+		if (p1.listener) {
+			p1.choice = 'q';
+			disablePlayer(p1, p2);
+		}
+	});
+	p1.elements.paper.addEventListener('click', function() {
+		if (p1.listener) {
+			p1.choice = 'w';
+			disablePlayer(p1, p2);
+		}
+	});
+	p1.elements.scissors.addEventListener('click', function() {
+		if (p1.listener) {
+			p1.choice = 'e';
+			disablePlayer(p1, p2);
+		}
+	});
+	
+	// - Player 2 button inputs
+	p2.elements.rock.addEventListener('click', function() {
+		if (p2.listener) {
+			p2.choice = 'i';
+			disablePlayer(p2, p1);
+		}
+	});
+	p2.elements.paper.addEventListener('click', function() {
+		if (p2.listener) {
+			p2.choice = 'o';
+			disablePlayer(p2, p1);
+		} 
+	});
+	p2.elements.scissors.addEventListener('click', function() {
+		if (p2.listener) {
+			p2.choice = 'p';
+			disablePlayer(p2, p1);
+		}
+	});
 }
 // - Game info
 function displayElements(thisDisplay) {
@@ -233,77 +306,3 @@ function scoreRound(){
 		startRound();
 	}, 2500);
 }
-
-// - Key Listener
-document.addEventListener('keyup', function(event) {
-	const keyName = event.key;
-	if ( p1.listener && ((keyName == 'q') || (keyName == 'w') || (keyName == 'e')) ) {
-		console.log(keyName + ' pressed');
-		switch (keyName) {
-			case 'q':
-			case 'w':
-			case 'e':
-				p1.choice = keyName;
-				disablePlayer(p1, p2);
-				break;
-		}
-	}
-
-	if ( p2.listener && ((keyName == 'i') || (keyName == 'o') || (keyName == 'p')) ) {
-		console.log(keyName + ' pressed');
-		switch (keyName) {
-			case 'i':
-			case 'o':
-			case 'p':
-				p2.choice = keyName;
-				disablePlayer(p2, p1);
-				break;
-		}
-	}
-	if ((p1.choice) || (p2.choice)) {
-		console.log(p1.choice + ' ' + p2.choice);
-	} else {
-		console.log('invalid input (caps lock?)');
-	}
-});
-
-// - Click Listeners
-	// Player 1
-p1.elements.rock.addEventListener('click', function() {
-	if (p1.listener) {
-		p1.choice = 'q';
-		disablePlayer(p1, p2);
-	}
-});
-p1.elements.paper.addEventListener('click', function() {
-	if (p1.listener) {
-		p1.choice = 'w';
-		disablePlayer(p1, p2);
-	}
-});
-p1.elements.scissors.addEventListener('click', function() {
-	if (p1.listener) {
-		p1.choice = 'e';
-		disablePlayer(p1, p2);
-	}
-});
-
-	// Player 2
-p2.elements.rock.addEventListener('click', function() {
-	if (p2.listener) {
-		p2.choice = 'i';
-		disablePlayer(p2, p1);
-	}
-});
-p2.elements.paper.addEventListener('click', function() {
-	if (p2.listener) {
-		p2.choice = 'o';
-		disablePlayer(p2, p1);
-	} 
-});
-p2.elements.scissors.addEventListener('click', function() {
-	if (p2.listener) {
-		p2.choice = 'p';
-		disablePlayer(p2, p1);
-	}
-});
