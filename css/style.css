@@ -37,8 +37,7 @@ h1:hover, h3:hover {
 	font-size: 1.5rem;
 }
 .bigger-text {
-	font-size: 2.4rem;
-	font-weight: bold;
+	font-size: 2.5rem;
 	margin-bottom: 1vh;
 }
 .btn-secondary:not([disabled]):not(.disabled).active, .btn-secondary:not([disabled]):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
@@ -54,10 +53,6 @@ h1:hover, h3:hover {
 }
 #start-button {
 	font-size: 2rem;
-}
-#paper-score, #rock-score, #scissors-score {
-	font-size: 2.5rem;
-	margin-bottom: 1vh;
 }
 
 @keyframes upDown {

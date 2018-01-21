@@ -9,7 +9,7 @@ let display = new Display();
 displayElements(display);
 
 // - Start the game after a short delay
-setTimeout(function() { startRound() }, 333);
+setTimeout(() => { startRound() }, 333);
 
 // - New player
 function Player(id) {
@@ -83,12 +83,10 @@ function Display() {
 function displayElements(thisDisplay) {
 	thisDisplay.elements.score = document.getElementById('score-text');
 	thisDisplay.elements.round = document.getElementById('round-text');
-
 	thisDisplay.elements.rock = document.getElementById('rock-score');
 	thisDisplay.elements.paper = document.getElementById('paper-score');
 	thisDisplay.elements.scissors = document.getElementById('scissors-score');
 	thisDisplay.elements.all = [ thisDisplay.elements.rock, thisDisplay.elements.paper, thisDisplay.elements.scissors ];
-
 	thisDisplay.audioWin = new Audio('audio/Whpsh.m4a');
 }
 
@@ -127,7 +125,6 @@ function audioSlap() {
 }
 
 function gameWinner(thisPlayer) {
-	console.log(`p${thisPlayer.id} wins the game`);
 	setListeners(false);
 	display.elements.rock.innerText = 'PLAYER';
 	display.elements.paper.innerText = thisPlayer.id;
@@ -154,7 +151,7 @@ function shakeHands() {
 			audioSlap();
 		}, i*333);
 		// - Reset hand animation
-		setTimeout(function() { document.querySelectorAll('img')[i].style.animation = '' }, 1000-(i*333));
+		setTimeout(() => { document.querySelectorAll('img')[i].style.animation = '' }, 1000-(i*333));
 	}
 }
 
@@ -209,9 +206,9 @@ function flashWinningP(winningHand, losingHand, handScore) {
 	losingHand.classList.remove('disabled');
 	losingHand.classList.add('btn-danger');
 
-	setTimeout(function() { winningHand.classList.add('btn-outline-success'); }, 500);
-	setTimeout(function() { winningHand.classList.remove('btn-outline-success'); }, 1000);
-	setTimeout(function() { winningHand.classList.add('btn-outline-success'); }, 1500);
+	setTimeout(function() { winningHand.classList.add('btn-outline-success') }, 500);
+	setTimeout(function() { winningHand.classList.remove('btn-outline-success') }, 1000);
+	setTimeout(function() { winningHand.classList.add('btn-outline-success') }, 1500);
 	setTimeout(function() {
 		winningHand.classList.remove('btn-outline-success');
 		handScore.style.fontWeight = 400;
@@ -229,10 +226,10 @@ function flashTie(p1Hand, p2Hand) {
 	p1Hand.classList.remove('disabled');
 	p2Hand.classList.remove('disabled');
 
-	setTimeout(function() { p1Hand.classList.add('btn-outline-secondary'); }, 500);
-	setTimeout(function() { p1Hand.classList.remove('btn-outline-secondary'); }, 1000);
-	setTimeout(function() { p2Hand.classList.add('btn-outline-secondary'); }, 500);
-	setTimeout(function() { p2Hand.classList.remove('btn-outline-secondary'); }, 1000);
+	setTimeout(function() { p1Hand.classList.add('btn-outline-secondary') }, 500);
+	setTimeout(function() { p1Hand.classList.remove('btn-outline-secondary') }, 1000);
+	setTimeout(function() { p2Hand.classList.add('btn-outline-secondary') }, 500);
+	setTimeout(function() { p2Hand.classList.remove('btn-outline-secondary') }, 1000);
 }
 
 // - Determine winner, apply points
