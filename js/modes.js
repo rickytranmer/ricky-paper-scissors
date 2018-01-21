@@ -1,19 +1,6 @@
 console.log('JS works');
 
-ready(setPageVars);
-
-// - document.ready
-function ready(fn) {
-  if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading"){
-    fn();
-  } else {
-    document.addEventListener('DOMContentLoaded', fn);
-  }
-}
-
-function setPageVars() {
-	let pageVars = new PageVars();
-}
+let pageVars = new PageVars();
 
 function PageVars() {
 	this.gameMode = 'game.html';
@@ -31,14 +18,14 @@ function PageVars() {
 }
 
 function startTheGame() {
-	window.location = gameMode;
+	window.location = pageVars.gameMode;
 }
 
 function separateGame() {
 	if (pageVars.twoPlayer.classList.contains('active')) {
-		gameMode = 'gameSplit.html';
+		pageVars.gameMode = 'gameSplit.html';
 	} else {
-		gameMode = 'vsCPUsplit.html';
+		pageVars.gameMode = 'vsCPUsplit.html';
 	}
 	pageVars.separateScore.classList.add('active');
 	pageVars.sharedScore.classList.remove('active');
@@ -46,9 +33,9 @@ function separateGame() {
 
 function sharedGame() {
 	if (pageVars.twoPlayer.classList.contains('active')) {
-		gameMode = 'game.html';
+		pageVars.gameMode = 'game.html';
 	} else {
-		gameMode = 'vsCPU.html';
+		pageVars.gameMode = 'vsCPU.html';
 	}
 	pageVars.sharedScore.classList.add('active');
 	pageVars.separateScore.classList.remove('active');
@@ -56,9 +43,9 @@ function sharedGame() {
 
 function cpuGame() {
 	if (pageVars.sharedScore.classList.contains('active')) {
-		gameMode = 'vsCPU.html';
+		pageVars.gameMode = 'vsCPU.html';
 	} else {
-		gameMode = 'vsCPUsplit.html';
+		pageVars.gameMode = 'vsCPUsplit.html';
 	}
 	pageVars.vsCpu.classList.add('active');
 	pageVars.twoPlayer.classList.remove('active');
@@ -67,9 +54,9 @@ function cpuGame() {
 
 function twoGame() {
 	if (pageVars.sharedScore.classList.contains('active')) {
-		gameMode = 'game.html';
+		pageVars.gameMode = 'game.html';
 	} else {
-		gameMode = 'gameSplit.html';
+		pageVars.gameMode = 'gameSplit.html';
 	}
 	pageVars.vsCpu.classList.remove('active');
 	pageVars.twoPlayer.classList.add('active');
