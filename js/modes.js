@@ -1,6 +1,5 @@
 console.log('JS works');
 
-var twoPlayerMode, sharedMode = true;
 var gameMode = 'game.html';
 
 function startTheGame() {
