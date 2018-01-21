@@ -39,26 +39,14 @@ function Display() {
 		const keyName = event.key;
 		if ( p1.listener && ((keyName == 'q') || (keyName == 'w') || (keyName == 'e')) ) {
 			console.log(keyName + ' pressed');
-			switch (keyName) {
-				case 'q':
-				case 'w':
-				case 'e':
-					p1.choice = keyName;
-					disablePlayer(p1, p2);
-					break;
-			}
+			p1.choice = keyName;
+			disablePlayer(p1, p2);
 		}
 
 		if ( p2.listener && ((keyName == 'i') || (keyName == 'o') || (keyName == 'p')) ) {
 			console.log(keyName + ' pressed');
-			switch (keyName) {
-				case 'i':
-				case 'o':
-				case 'p':
-					p2.choice = keyName;
-					disablePlayer(p2, p1);
-					break;
-			}
+			p2.choice = keyName;
+			disablePlayer(p2, p1);
 		}
 		if ((p1.choice) || (p2.choice)) {
 			console.log(p1.choice + ' ' + p2.choice);
