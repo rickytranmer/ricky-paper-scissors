@@ -1,55 +1,76 @@
 console.log('JS works');
 
-var gameMode = 'game.html';
+ready(setPageVars);
+
+// - document.ready
+function ready(fn) {
+  if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading"){
+    fn();
+  } else {
+    document.addEventListener('DOMContentLoaded', fn);
+  }
+}
+
+function setPageVars() {
+	let pageVars = new PageVars();
+}
+
+function PageVars() {
+	this.gameMode = 'game.html';
+	this.separateScore = document.getElementById('separate-score');
+	this.sharedScore = document.getElementById('shared-score');
+	this.vsCpu = document.getElementById('vs-cpu');
+	this.twoPlayer = document.getElementById('two-player');
+	
+	// - Click Listeners
+	document.querySelector('.go-button').addEventListener("click", startTheGame);
+	this.separateScore.addEventListener("click", separateGame);
+	this.sharedScore.addEventListener("click", sharedGame);
+	this.vsCpu.addEventListener("click", cpuGame);
+	this.twoPlayer.addEventListener("click", twoGame);
+}
 
 function startTheGame() {
 	window.location = gameMode;
 }
 
 function separateGame() {
-	if (document.getElementById('two-player').classList.contains('active')) {
+	if (pageVars.twoPlayer.classList.contains('active')) {
 		gameMode = 'gameSplit.html';
 	} else {
 		gameMode = 'vsCPUsplit.html';
 	}
-	document.getElementById('separate-score').classList.add('active');
-	document.getElementById('shared-score').classList.remove('active');
+	pageVars.separateScore.classList.add('active');
+	pageVars.sharedScore.classList.remove('active');
 }
 
 function sharedGame() {
-	if (document.getElementById('two-player').classList.contains('active')) {
+	if (pageVars.twoPlayer.classList.contains('active')) {
 		gameMode = 'game.html';
 	} else {
 		gameMode = 'vsCPU.html';
 	}
-	document.getElementById('shared-score').classList.add('active');
-	document.getElementById('separate-score').classList.remove('active');
+	pageVars.sharedScore.classList.add('active');
+	pageVars.separateScore.classList.remove('active');
 }
 
 function cpuGame() {
-	if (document.getElementById('shared-score').classList.contains('active')) {
+	if (pageVars.sharedScore.classList.contains('active')) {
 		gameMode = 'vsCPU.html';
 	} else {
 		gameMode = 'vsCPUsplit.html';
 	}
-	document.getElementById('vs-cpu').classList.add('active');
-	document.getElementById('two-player').classList.remove('active');
+	pageVars.vsCpu.classList.add('active');
+	pageVars.twoPlayer.classList.remove('active');
 
 }
 
 function twoGame() {
-	if (document.getElementById('shared-score').classList.contains('active')) {
+	if (pageVars.sharedScore.classList.contains('active')) {
 		gameMode = 'game.html';
 	} else {
 		gameMode = 'gameSplit.html';
 	}
-	document.getElementById('vs-cpu').classList.remove('active');
-	document.getElementById('two-player').classList.add('active');
+	pageVars.vsCpu.classList.remove('active');
+	pageVars.twoPlayer.classList.add('active');
 }
-
-// - Click listeners
-document.querySelector('.go-button').addEventListener("click", startTheGame);
-document.getElementById('separate-score').addEventListener("click", separateGame);
-document.getElementById('shared-score').addEventListener("click", sharedGame);
-document.getElementById('vs-cpu').addEventListener("click", cpuGame);
-document.getElementById('two-player').addEventListener("click", twoGame);

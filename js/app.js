@@ -226,7 +226,6 @@ function createButtons() {
 	backBtn.addEventListener('click', function() { window.location = 'index.html' });
 }
 
-
 // - Flash winning hand button, and bold winning hand pts value
 function flashWinningP(winningHand, losingHand, handScore) {
 	handScore.style.fontWeight = 900;
