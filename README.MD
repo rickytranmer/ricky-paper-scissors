@@ -1,6 +1,6 @@
 # RICKY // PAPER // SCISSORS
 
-## [PLAY ME](https://rickytranmer.github.io/wdi-project-1/)
+## [PLAY ME](https://rickytranmer.github.io/ricky-paper-scissors/)
 
 [Trello](https://trello.com/b/enXXdmEj/wdi-6-project-1) & [Wireframes](https://drive.google.com/open?id=1szioAdYoNQNIWoCWDdpcaTEwnO5-bF2E)
 
