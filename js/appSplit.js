@@ -155,7 +155,7 @@ function shakeHands() {
 	p2.scoring.rock = Math.floor((Math.random() * 6) + 1);
 	p2.scoring.paper = Math.floor((Math.random() * 6) + 1);
 	p2.scoring.scissors = Math.floor((Math.random() * 6) + 1);
-	p2.scoring.all = [ p1.scoring.rock, p1.scoring.paper, p1.scoring.scissors ];
+	p2.scoring.all = [ p2.scoring.rock, p2.scoring.paper, p2.scoring.scissors ];
 
 	// - Shake animation for each hand img over period of 1 sec
 	for (let i = 0; i < 3; i++) {
