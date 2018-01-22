@@ -27,7 +27,7 @@ p {
 .jumbotron {
 	padding: .25rem 1rem;
 	text-align: center;
-	margin-bottom: 2vh;
+	margin: 1.5vh 0;
 }
 .centerMe {
 	text-align: center;

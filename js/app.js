@@ -193,8 +193,8 @@ function createButtons() {
 	let backBtn = document.createElement('button');
 
 	resetButtons.style.textAlign = 'center';
-	backBtn.style.margin = '20px';
-	resetBtn.style.margin = '20px';
+	backBtn.style.margin = '1vh';
+	resetBtn.style.margin = '1vh';
 
 	backBtn.classList.add('btn-danger');
 	backBtn.classList.add('btn-lg');
