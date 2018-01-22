@@ -10,7 +10,7 @@ h3 {
 }
 h4 {
 	color: red;
-	margin: 1vh auto;
+	margin: 1.25vh auto;
 }
 img {
 	width: 100%;
@@ -19,6 +19,9 @@ img {
 }
 h1:hover, h3:hover {
 	color: #FFDC00;
+}
+p {
+	margin-bottom: 1vh;
 }
 
 .jumbotron {

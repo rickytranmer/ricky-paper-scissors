@@ -103,9 +103,9 @@ function startRound() {
 	p2.elements.scissors.classList.remove('disabled');
 
 	// - Check if winner - else play!
-	if (p1.score >= 15) {
+	if (p1.score >= 10) {
 		gameWinner(p1);
-	} else if (p2.score >= 15) {
+	} else if (p2.score >= 10) {
 		gameWinner(p2);
 	} else {
 		// - Rock, Paper, Scissors!
@@ -137,11 +137,28 @@ function gameWinner(thisPlayer) {
 
 // - Shake hands, show pts, show round is starting
 function shakeHands() {
-	display.score.rock = Math.floor((Math.random() * 6) + 1);
-	display.score.paper = Math.floor((Math.random() * 6) + 1);
-	display.score.scissors = Math.floor((Math.random() * 6) + 1);
+	let scoreLayout = Math.floor(Math.random() * 6);
+	switch (scoreLayout) {
+		case 0:
+			display.score = { rock: 1, paper: 2, scissors: 3, all: [] };
+			break;
+		case 1:
+			display.score = { rock: 1, paper: 3, scissors: 2, all: [] };
+			break;
+		case 2:
+			display.score = { rock: 2, paper: 1, scissors: 3, all: [] };
+			break;
+		case 3:
+			display.score = { rock: 2, paper: 3, scissors: 1, all: [] };
+			break;
+		case 4:
+			display.score = { rock: 3, paper: 1, scissors: 2, all: [] };
+			break;
+		case 5:
+			display.score = { rock: 3, paper: 2, scissors: 1, all: [] };
+			break;
+	}
 	display.score.all = [ display.score.rock, display.score.paper, display.score.scissors ];
-	console.log(display.score.all);
 
 	// - Shake animation for each hand img over period of 1 sec
 	for (let i = 0; i < 3; i++) {
