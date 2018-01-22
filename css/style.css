@@ -31,8 +31,8 @@ h1:hover, h3:hover {
 }
 .btn-hand {
 	padding: 2vh 1vh;
-	margin-bottom: 1vh;
-	min-width: 25vw;
+	margin: 1vh auto;
+	font-size: 1.25rem;
 }
 .scores {
 	font-size: 1.5rem;
@@ -46,9 +46,6 @@ h1:hover, h3:hover {
 }
 .player-two {
 	margin-bottom: 0vh;
-}
-.btn-block.btn-hand {
-	font-size: 2rem;
 }
 
 #two-player, #vs-cpu, #separate-score, #shared-score  {
