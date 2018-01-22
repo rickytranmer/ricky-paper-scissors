@@ -10,7 +10,7 @@ h3 {
 }
 h4 {
 	color: red;
-	margin-top: 10px;
+	margin: 1vh auto;
 }
 img {
 	width: 100%;
@@ -30,8 +30,9 @@ h1:hover, h3:hover {
 	text-align: center;
 }
 .btn-hand {
-	padding: 1rem .5rem;
+	padding: 2vh 1vh;
 	margin-bottom: 1vh;
+	min-width: 25vw;
 }
 .scores {
 	font-size: 1.5rem;
@@ -46,6 +47,9 @@ h1:hover, h3:hover {
 .player-two {
 	margin-bottom: 0vh;
 }
+.btn-block.btn-hand {
+	font-size: 2rem;
+}
 
 #two-player, #vs-cpu, #separate-score, #shared-score  {
 	padding: 35px;	
@@ -53,6 +57,9 @@ h1:hover, h3:hover {
 }
 #start-button {
 	font-size: 2rem;
+}
+#score-text {
+	margin-bottom: 1vh;
 }
 
 @keyframes upDown {

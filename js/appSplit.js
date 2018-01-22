@@ -1,178 +1,196 @@
-console.log('JS works');
+console.log('appSplit.js loaded');
 
-var audio = new Audio('audio/Slap.mp3'); //http://soundbible.com/2047-Banana-Slap.html
-var audioWin = new Audio('audio/Whpsh.m4a');
+let p1 = new Player(1);
+let p2 = new Player(2);
+playerElements(p1);
+playerElements(p2);
 
-var p1Score = 0;
-var p2Score = 0;
-var rounds = 0;
-var p1Choice = '';
-var p2Choice = '';
-var p1Listener = false;
-var p2Listener = false;
+let display = new Display();
+displayElements(display);
 
-var scoreText = document.getElementById('score-text');
-var roundText = document.getElementById('round-text');
-console.log(scoreText);
-console.log(roundText);
+// - Start the game after a short delay
+setTimeout(() => { startRound() }, 333);
 
-var rockScoreP1 = document.getElementById('rock-score1');
-var paperScoreP1 = document.getElementById('paper-score1');
-var scisssorsScoreP1 = document.getElementById('scissors-score1');
-var rockScore1, paperScore1, scissorsScore1 = 1;
-console.log(rockScoreP1);
-console.log(paperScoreP1);
-console.log(scisssorsScoreP1);
+function Player(id) {
+	this.id = id;
+	this.score = 0;
+	this.choice = 0;
+	this.listener = false;
+	this.elements = {};
+	this.scoring = { rock: 1, paper: 1, scissors: 1, all: [], elements: {} };
+}
+function playerElements(thisPlayer) {
+	thisPlayer.elements = {
+		rock: document.getElementById(thisPlayer.id + 'rock'),
+		paper: document.getElementById(thisPlayer.id + 'paper'),
+		scissors: document.getElementById(thisPlayer.id + 'scissors')
+	};
+	thisPlayer.scoring.elements = {
+		rock: document.getElementById('rock-score' + thisPlayer.id),
+		paper: document.getElementById('paper-score' + thisPlayer.id),
+		scissors: document.getElementById('scissors-score' + thisPlayer.id),
+		all: []
+	};
+	thisPlayer.scoring.elements.all = [ thisPlayer.scoring.elements.rock, thisPlayer.scoring.elements.paper, thisPlayer.scoring.elements.scissors ]
+}
 
-var rockScoreP2 = document.getElementById('rock-score2');
-var paperScoreP2 = document.getElementById('paper-score2');
-var scisssorsScoreP2 = document.getElementById('scissors-score2');
-var rockScore2, paperScore2, scissorsScore2 = 1;
-console.log(rockScoreP2);
-console.log(paperScoreP2);
-console.log(scisssorsScoreP2);
+function Display() {
+	this.rounds = 0;
+	this.elements = {};
 
-var oneRock = document.getElementById('one-rock');
-var onePaper = document.getElementById('one-paper');
-var oneScissors = document.getElementById('one-scissors');
-console.log(oneRock);
-console.log(onePaper);
-console.log(oneScissors);
+	// - Key press listener
+	document.addEventListener('keyup', function(event) {
+		const keyName = event.key;
+		if ( p1.listener && ((keyName == 'q') || (keyName == 'w') || (keyName == 'e')) ) {
+			disablePlayer(p1, keyName, p2);
+		}
+		if ( p2.listener && ((keyName == 'i') || (keyName == 'o') || (keyName == 'p')) ) {
+			disablePlayer(p2, keyName, p1);
+		}
+	});
 
-var twoRock = document.getElementById('two-rock');
-var twoPaper = document.getElementById('two-paper');
-var twoScissors = document.getElementById('two-scissors');
-console.log(twoRock);
-console.log(twoPaper);
-console.log(twoScissors);
+	// - Player 1 button inputs
+	p1.elements.rock.addEventListener('click', function() {
+		if (p1.listener) {
+			disablePlayer(p1, 'q', p2);
+		}
+	});
+	p1.elements.paper.addEventListener('click', function() {
+		if (p1.listener) {
+			disablePlayer(p1, 'w', p2);
+		}
+	});
+	p1.elements.scissors.addEventListener('click', function() {
+		if (p1.listener) {
+			disablePlayer(p1, 'e', p2);
+		}
+	});
+	
+	// - Player 2 button inputs
+	p2.elements.rock.addEventListener('click', function() {
+		if (p2.listener) {
+			disablePlayer(p2, 'i', p1);
+		}
+	});
+	p2.elements.paper.addEventListener('click', function() {
+		if (p2.listener) {
+			disablePlayer(p2, 'o', p1);
+		} 
+	});
+	p2.elements.scissors.addEventListener('click', function() {
+		if (p2.listener) {
+			disablePlayer(p2, 'p', p1);
+		}
+	});
+}
+
+function displayElements(thisDisplay) {
+	thisDisplay.elements.score = document.getElementById('score-text');
+	thisDisplay.elements.round = document.getElementById('round-text');
+	thisDisplay.elements.rock = document.getElementById('rock-score');
+	thisDisplay.elements.paper = document.getElementById('paper-score');
+	thisDisplay.elements.scissors = document.getElementById('scissors-score');
+	thisDisplay.elements.all = [ thisDisplay.elements.rock, thisDisplay.elements.paper, thisDisplay.elements.scissors ];
+	thisDisplay.audioWin = new Audio('audio/Whpsh.m4a');
+}
 
 function startRound() {
-	rounds++;
-	roundText.innerText = rounds;
+	display.rounds++;
+	display.elements.round.innerText = display.rounds;
 	
 	// - Reset hand input classes
-	oneRock.classList.remove('disabled');
-	onePaper.classList.remove('disabled');
-	oneScissors.classList.remove('disabled');
-	twoRock.classList.remove('disabled');
-	twoPaper.classList.remove('disabled');
-	twoScissors.classList.remove('disabled');
+	p1.elements.rock.classList.remove('disabled');
+	p1.elements.paper.classList.remove('disabled');
+	p1.elements.scissors.classList.remove('disabled');
+	p2.elements.rock.classList.remove('disabled');
+	p2.elements.paper.classList.remove('disabled');
+	p2.elements.scissors.classList.remove('disabled');
 
 	// - Check if winner - else play!
-	if (p1Score >= 15) {
-		console.log('p1 wins the game');
-		oneRock.classList.add('btn-success');
-		onePaper.classList.add('btn-success');
-		oneScissors.classList.add('btn-success');
-
-		rockScoreP1.innerText = 'PLAYER';
-		paperScoreP1.innerText = '1';
-		scisssorsScoreP1.innerText = 'WINS';
-		paperScoreP1.style.fontWeight = 900;
-
-		rockScoreP2.innerText = 'PLAYER';
-		paperScoreP2.innerText = '1';
-		scisssorsScoreP2.innerText = 'WINS';
-		paperScoreP2.style.fontWeight = 900;
-
-		createButtons();
-	} else if (p2Score >= 15) {
-		console.log('p2 wins the game');
-		twoRock.classList.add('btn-success');
-		twoPaper.classList.add('btn-success');
-		twoScissors.classList.add('btn-success');
-
-		rockScoreP1.innerText = 'PLAYER';
-		paperScoreP1.innerText = '2';
-		scisssorsScoreP1.innerText = 'WINS';
-		paperScoreP1.style.fontWeight = 900;
-
-		rockScoreP2.innerText = 'PLAYER';
-		paperScoreP2.innerText = '2';
-		scisssorsScoreP2.innerText = 'WINS';
-		paperScoreP2.style.fontWeight = 900;
-
-		createButtons();
+	if (p1.score >= 15) {
+		gameWinner(p1);
+	} else if (p2.score >= 15) {
+		gameWinner(p2);
 	} else {
-		//Rock, Paper, Scissors!
-		p1Listener = true;
-		p2Listener = true;
-		shakeHands();
+		// - Rock, Paper, Scissors!
+		setListeners(true);
 	}
+}
+
+function setListeners(bool) {
+	p1.listener = bool;
+	p2.listener = bool;
+	bool ? shakeHands() : createButtons();
+}
+
+function audioSlap() {
+	display.audio = new Audio('audio/Slap.mp3');
+	display.audio.play();
+}
+
+function gameWinner(thisPlayer) {
+	setListeners(false);
+	p1.scoring.elements.rock.innerText = 'PLAYER';
+	p1.scoring.elements.paper.innerText = thisPlayer.id;
+	p1.scoring.elements.scissors.innerText = 'WINS';
+	p1.scoring.elements.paper.style.fontWeight = 900;
+
+	p2.scoring.elements.rock.innerText = 'PLAYER';
+	p2.scoring.elements.paper.innerText = thisPlayer.id;
+	p2.scoring.elements.scissors.innerText = 'WINS';
+	p2.scoring.elements.paper.style.fontWeight = 900;
+
+	thisPlayer.elements.rock.classList.add('btn-success');
+	thisPlayer.elements.paper.classList.add('btn-success');
+	thisPlayer.elements.scissors.classList.add('btn-success');
 }
 
 // - Shake hands, show pts, show round is starting
 function shakeHands() {
-	rockScore1 = Math.floor((Math.random() * 6) + 1);
-	paperScore1 = Math.floor((Math.random() * 6) + 1);
-	scissorsScore1 = Math.floor((Math.random() * 6) + 1);
-	rockScore2 = Math.floor((Math.random() * 6) + 1);
-	paperScore2 = Math.floor((Math.random() * 6) + 1);
-	scissorsScore2 = Math.floor((Math.random() * 6) + 1);
-	audio = new Audio('audio/Slap.mp3');
+	p1.scoring.rock = Math.floor((Math.random() * 6) + 1);
+	p1.scoring.paper = Math.floor((Math.random() * 6) + 1);
+	p1.scoring.scissors = Math.floor((Math.random() * 6) + 1);
+	p1.scoring.all = [ p1.scoring.rock, p1.scoring.paper, p1.scoring.scissors ];
 	
-	document.querySelectorAll('img')[0].style.animation = 'upDown .33s';
-	document.querySelectorAll('img')[3].style.animation = 'upDown .33s';
-	rockScoreP1.innerText = rockScore1 + 'pts';
-	rockScoreP2.innerText = rockScore2 + 'pts';
-	audio.play();
+	p2.scoring.rock = Math.floor((Math.random() * 6) + 1);
+	p2.scoring.paper = Math.floor((Math.random() * 6) + 1);
+	p2.scoring.scissors = Math.floor((Math.random() * 6) + 1);
+	p2.scoring.all = [ p1.scoring.rock, p1.scoring.paper, p1.scoring.scissors ];
 
-	setTimeout(function() {
-		audio = new Audio('audio/Slap.mp3');
-		document.querySelectorAll('img')[1].style.animation = 'upDown .33s';
-		document.querySelectorAll('img')[4].style.animation = 'upDown .33s';
-		paperScoreP1.innerText = paperScore1 + 'pts';
-		paperScoreP2.innerText = paperScore2 + 'pts';
-		audio.play();
-	}, 333);
-	setTimeout(function() {
-		audio = new Audio('audio/Slap.mp3');
-		document.querySelectorAll('img')[2].style.animation = 'upDown .33s';
-		document.querySelectorAll('img')[5].style.animation = 'upDown .33s';
-		scisssorsScoreP1.innerText = scissorsScore1 + 'pts';
-		scisssorsScoreP2.innerText = scissorsScore2 + 'pts';
-		audio.play();
-	}, 666);
-	setTimeout(function() { 
-		for (let i = 0; i < 6; i++) {
-			document.querySelectorAll('img')[i].style.animation = '';
-		}
-	}, 1000);
-}
-
-// - Disable p1 inputs, score if p2 ready
-function disableOne() {
-	console.log('p1 choice' + p1Choice);
-	oneRock.classList.add('disabled');
-	onePaper.classList.add('disabled');
-	oneScissors.classList.add('disabled');
-	p1Listener = false;
-
-	if (!p2Listener) {
-		console.log('p2 finished first');
-		scoreRound();
+	// - Shake animation for each hand img over period of 1 sec
+	for (let i = 0; i < 3; i++) {
+		setTimeout(function() {
+			p1.scoring.elements.all[i].innerText = p1.scoring.all[i];
+			p2.scoring.elements.all[i].innerText = p2.scoring.all[i];
+			document.querySelectorAll('img')[i].style.animation = 'upDown .33s';
+			document.querySelectorAll('img')[i+3].style.animation = 'upDown .33s';
+			audioSlap();
+		}, i*333);
+		// - Reset hand animation
+		setTimeout(() => { document.querySelectorAll('img')[i].style.animation = '' }, 1000-(i*333));
+		setTimeout(() => { document.querySelectorAll('img')[i+3].style.animation = '' }, 1000-(i*333));
 	}
 }
 
-// - Disable p2 inputs, score if p1 ready
-function disableTwo() {
-	console.log('p1 choice' + p1Choice);
-	twoRock.classList.add('disabled');
-	twoPaper.classList.add('disabled');
-	twoScissors.classList.add('disabled');
-	p2Listener = false;
+// - Disable thisPlayer inputs, score if thatPlayer ready
+function disablePlayer(thisPlayer, theirChoice, thatPlayer) {
+	thisPlayer.choice = theirChoice;
+	thisPlayer.elements.rock.classList.add('disabled');
+	thisPlayer.elements.paper.classList.add('disabled');
+	thisPlayer.elements.scissors.classList.add('disabled');
+	thisPlayer.listener = false;
 
-	if (!p1Listener) {
-		console.log('p1 finished first');
+	if (!thatPlayer.listener) {
+		console.log(`p${thatPlayer.id} finished first`);
 		scoreRound();
 	}
 }
 
 // - Create Back & Reset buttons
 function createButtons() {
-	var resetButtons = document.getElementById('reset-buttons');
-	var resetBtn = document.createElement('button');
-	var backBtn = document.createElement('button');
+	let resetButtons = document.getElementById('reset-buttons');
+	let resetBtn = document.createElement('button');
+	let backBtn = document.createElement('button');
 
 	resetButtons.style.textAlign = 'center';
 	backBtn.style.margin = '20px';
@@ -199,7 +217,7 @@ function createButtons() {
 // - Bold winning hand pts value, flash Winner's hand button
 function flashWinningP(winningHand, losingHand, handScore) {
 	handScore.style.fontWeight = 900;
-	setTimeout(function() { audioWin.play(); }, 250);
+	setTimeout(function() { display.audioWin.play(); }, 250);
 
 	winningHand.classList.remove('disabled');
 	winningHand.classList.add('btn-success');
@@ -234,46 +252,44 @@ function flashTie(p1Hand, p2Hand) {
 
 // - Determine winner, apply points
 function scoreRound(){
-	console.log('p1' + p1Choice);
-	console.log('p2' + p2Choice);
-	switch (p1Choice) {
+	switch (p1.choice) {
 		case 'q':
-			if (p2Choice == 'i') {
-				flashTie(oneRock, twoRock);
-			} else if (p2Choice == 'o') {
-				p2Score += paperScore2;
-				flashWinningP(twoPaper, oneRock, paperScoreP2);
+			if (p2.choice == 'i') {
+				flashTie(p1.elements.rock, p2.elements.rock);
+			} else if (p2.choice == 'o') {
+				p2.score += p2.scoring.paper;
+				flashWinningP(p2.elements.paper, p1.elements.rock, p2.scoring.elements.paper);
 			} else {
-				p1Score += rockScore1;
-				flashWinningP(oneRock, twoScissors, rockScoreP1);
+				p1.score += p1.scoring.rock;
+				flashWinningP(p1.elements.rock, p2.elements.scissors, p1.scoring.elements.rock);
 			}
 			break;
 		case 'w':
-			if (p2Choice == 'i') {
-				p1Score += paperScore1;
-				flashWinningP(onePaper, twoRock, paperScoreP1);
-			} else if (p2Choice == 'o') {
-				flashTie(onePaper, twoPaper);
+			if (p2.choice == 'i') {
+				p1.score += p1.scoring.paper;
+				flashWinningP(p1.elements.paper, p2.elements.rock, p1.scoring.elements.paper);
+			} else if (p2.choice == 'o') {
+				flashTie(p1.elements.paper, p2.elements.paper);
 			} else {
-				p2Score += scissorsScore2;
-				flashWinningP(twoScissors, onePaper, scisssorsScoreP2);
+				p2.score += p2.scoring.scissors;
+				flashWinningP(p2.elements.scissors, p1.elements.paper, p2.scoring.elements.scissors);
 			}
 			break;
 		case 'e':
-			if (p2Choice == 'i') {
-				p2Score += rockScore2;
-				flashWinningP(twoRock, oneScissors, rockScoreP2);
-			} else if (p2Choice == 'o') {
-				p1Score += scissorsScore1;
-				flashWinningP(oneScissors, twoPaper, scisssorsScoreP1);
+			if (p2.choice == 'i') {
+				p2.score += p2.scoring.rock;
+				flashWinningP(p2.elements.rock, p1.elements.scissors, p2.scoring.elements.rock);
+			} else if (p2.choice == 'o') {
+				p1.score += p1.scoring.scissors;
+				flashWinningP(p1.elements.scissors, p2.elements.paper, p1.scoring.elements.scissors);
 			} else {
-				flashTie(oneScissors, twoScissors);
+				flashTie(p1.elements.scissors, p2.elements.scissors);
 			}
 			break;
 	}
 
 	setTimeout(function() {
-		scoreText.innerHTML = '<span class="bigger-text">' + p1Score + '</span> vs <span class="bigger-text">' + p2Score + '</span';
+		display.elements.score.innerHTML = '<span class="bigger-text">' + p1.score + '</span> vs <span class="bigger-text">' + p2.score + '</span';
 		startRound();
 	}, 2500);
 }
@@ -281,76 +297,68 @@ function scoreRound(){
 // - Key Listener
 document.addEventListener('keyup', function(event) {
 	const keyName = event.key;
-	if ( p1Listener && ((keyName == 'q') || (keyName == 'w') || (keyName == 'e')) ) {
+	if ( p1.listener && ((keyName == 'q') || (keyName == 'w') || (keyName == 'e')) ) {
 		console.log(keyName + ' pressed');
 		switch (keyName) {
 			case 'q':
 			case 'w':
 			case 'e':
-				p1Choice = keyName;
+				p1.choice = keyName;
 				disableOne();
 				break;
 		}
 	}
 
-	if ( p2Listener && ((keyName == 'i') || (keyName == 'o') || (keyName == 'p')) ) {
+	if ( p2.listener && ((keyName == 'i') || (keyName == 'o') || (keyName == 'p')) ) {
 		console.log(keyName + ' pressed');
 		switch (keyName) {
 			case 'i':
 			case 'o':
 			case 'p':
-				p2Choice = keyName;
+				p2.choice = keyName;
 				disableTwo();
 				break;
 		}
-	}
-	if ((p1Choice) || (p2Choice)) {
-		console.log(p1Choice + ' ' + p2Choice);
-	} else {
-		console.log('invalid input (caps lock?)');
 	}
 });
 
 // - Click Listeners
 	// Player 1
-oneRock.addEventListener('click', function() {
-	if (p1Listener) {
-		p1Choice = 'q';
+p1.elements.rock.addEventListener('click', function() {
+	if (p1.listener) {
+		p1.choice = 'q';
 		disableOne();
 	}
 });
-onePaper.addEventListener('click', function() {
-	if (p1Listener) {
-		p1Choice = 'w';
+p1.elements.paper.addEventListener('click', function() {
+	if (p1.listener) {
+		p1.choice = 'w';
 		disableOne();
 	}
 });
-oneScissors.addEventListener('click', function() {
-	if (p1Listener) {
-		p1Choice = 'e';
+p1.elements.scissors.addEventListener('click', function() {
+	if (p1.listener) {
+		p1.choice = 'e';
 		disableOne();
 	}
 });
 
 	// Player 2
-twoRock.addEventListener('click', function() {
-	if (p2Listener) {
-		p2Choice = 'i';
+p2.elements.rock.addEventListener('click', function() {
+	if (p2.listener) {
+		p2.choice = 'i';
 		disableTwo();
 	}
 });
-twoPaper.addEventListener('click', function() {
-	if (p2Listener) {
-		p2Choice = 'o';
+p2.elements.paper.addEventListener('click', function() {
+	if (p2.listener) {
+		p2.choice = 'o';
 		disableTwo();
 	}
 });
-twoScissors.addEventListener('click', function() {
-	if (p2Listener) {
-		p2Choice = 'p';
+p2.elements.scissors.addEventListener('click', function() {
+	if (p2.listener) {
+		p2.choice = 'p';
 		disableTwo();
 	}
 });
-
-// - Start the game (after a short delay, and after audio loads)
-setTimeout(function() { audio.addEventListener("canplay", startRound()); }, 333);
