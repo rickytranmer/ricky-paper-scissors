@@ -6,7 +6,7 @@
 
 ## A Twist on a Classic
 
-Most of today's 2D fighters still rely on some form of Rock, Paper, Scissors (Attack, Block, Grab).  The option a player chooses is based on weighted criteria.  This game seeks to bring that idea to its simplest form.  Your choices will have different point values (1-6 / standard dice roll), but your opponent will know them, too.  Play ends when a player reaches 15 points.
+Most of today's 2D fighters still rely on some form of Rock, Paper, Scissors (Attack, Block, Grab).  The option a player chooses is based on weighted criteria.  This game seeks to bring that idea to its simplest form.  Your choices will have different point values (1-3pts in 2 Player, 1-6pts vs CPU), but your opponent will know them, too.  Play ends when a player reaches 10 points (15 vs CPU).
 
 ### Weighted Options
 
@@ -22,7 +22,7 @@ I came up with the idea for this game while trying to think of simplifying the f
 
 ### CPU Logic
 
-Rather than choose a random hand, the CPU will base it's decision on the point values available.  It selecets one of the point values to determine which 'logicNum' to use.  You can use this tiny bit of information to choose the best hand each round.
+Rather than choose a random hand, the CPU will base its decision on the point values available, selecting one of the hand point values to determine its 'logicNum'.  This makes playing against the computer more like a puzzle than a coin flip.  You can use this tiny bit of information to choose the best hand each round!
 
 - Shared Score Logic
 	- #1 automatically lose
@@ -41,9 +41,6 @@ Rather than choose a random hand, the CPU will base it's decision on the point v
 
 ### TODO
 
-- condense variables into objects using constructors
-- DRY out functions, move into main.js that every page will load, then use their individual js files
 - add mute audio button to header
-- add alt paths for images
 - think of new modes
 - add sounds, images, animations on certain conditions
