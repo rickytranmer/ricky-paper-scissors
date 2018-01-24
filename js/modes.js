@@ -10,7 +10,7 @@ function PageVars() {
 	this.twoPlayer = document.getElementById('two-player');
 	
 	// - Click Listeners
-	document.querySelector('.go-button').addEventListener("click", startTheGame);
+	document.querySelector('#start-button').addEventListener("click", startTheGame);
 	this.separateScore.addEventListener("click", separateGame);
 	this.sharedScore.addEventListener("click", sharedGame);
 	this.vsCpu.addEventListener("click", cpuGame);

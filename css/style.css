@@ -56,7 +56,8 @@ p {
 	margin: 10px auto;
 }
 #start-button {
-	font-size: 2rem;
+	font-size: 2.5rem;
+	letter-spacing: 1rem;
 }
 #score-text {
 	margin-bottom: 1vh;
