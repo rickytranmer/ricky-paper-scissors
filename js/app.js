@@ -46,34 +46,34 @@ function Display() {
 	});
 
 	// - Player 1 button inputs
-	p1.elements.rock.addEventListener('click', function() {
+	p1.elements.rock.addEventListener('click', ()=> {
 		if (p1.listener) {
 			disablePlayer(p1, 'q', p2);
 		}
 	});
-	p1.elements.paper.addEventListener('click', function() {
+	p1.elements.paper.addEventListener('click', ()=> {
 		if (p1.listener) {
 			disablePlayer(p1, 'w', p2);
 		}
 	});
-	p1.elements.scissors.addEventListener('click', function() {
+	p1.elements.scissors.addEventListener('click', ()=> {
 		if (p1.listener) {
 			disablePlayer(p1, 'e', p2);
 		}
 	});
 	
 	// - Player 2 button inputs
-	p2.elements.rock.addEventListener('click', function() {
+	p2.elements.rock.addEventListener('click', ()=> {
 		if (p2.listener) {
 			disablePlayer(p2, 'i', p1);
 		}
 	});
-	p2.elements.paper.addEventListener('click', function() {
+	p2.elements.paper.addEventListener('click', ()=> {
 		if (p2.listener) {
 			disablePlayer(p2, 'o', p1);
 		} 
 	});
-	p2.elements.scissors.addEventListener('click', function() {
+	p2.elements.scissors.addEventListener('click', ()=> {
 		if (p2.listener) {
 			disablePlayer(p2, 'p', p1);
 		}
@@ -162,7 +162,7 @@ function shakeHands() {
 
 	// - Shake animation for each hand img over period of 1 sec
 	for (let i = 0; i < 3; i++) {
-		setTimeout(function() {
+		setTimeout(()=> {
 			display.elements.all[i].innerText = display.score.all[i];
 			document.querySelectorAll('img')[i].style.animation = 'upDown .33s';
 			audioSlap();
@@ -209,30 +209,30 @@ function createButtons() {
 	// - Attach to col-2 div and listen for clicks
 	resetButtons.appendChild(backBtn);
 	resetButtons.appendChild(resetBtn);
-	resetBtn.addEventListener('click', function() { window.location = 'game.html' });
-	backBtn.addEventListener('click', function() { window.location = 'index.html' });
+	resetBtn.addEventListener('click', ()=> { window.location = 'game.html' });
+	backBtn.addEventListener('click', ()=> { window.location = 'index.html' });
 }
 
 // - Flash winning hand button, and bold winning hand pts value
 function flashWinningP(winningHand, losingHand, handScore) {
 	handScore.style.fontWeight = 900;
-	setTimeout(function() { display.audioWin.play(); }, 250);
+	setTimeout(()=> { display.audioWin.play() }, 250);
 
 	winningHand.classList.remove('disabled');
 	winningHand.classList.add('btn-success');
 	losingHand.classList.remove('disabled');
 	losingHand.classList.add('btn-danger');
 
-	setTimeout(function() { winningHand.classList.add('btn-outline-success') }, 500);
-	setTimeout(function() { winningHand.classList.remove('btn-outline-success') }, 1000);
-	setTimeout(function() { winningHand.classList.add('btn-outline-success') }, 1500);
-	setTimeout(function() {
+	setTimeout(()=> { winningHand.classList.add('btn-outline-success') }, 500);
+	setTimeout(()=> { winningHand.classList.remove('btn-outline-success') }, 1000);
+	setTimeout(()=> { winningHand.classList.add('btn-outline-success') }, 1500);
+	setTimeout(()=> {
 		winningHand.classList.remove('btn-outline-success');
 		handScore.style.fontWeight = 400;
 	}, 2000);
 
 	// - Prepare for next round
-	setTimeout(function() {
+	setTimeout(()=> {
 		winningHand.classList.remove('btn-success');
 		losingHand.classList.remove('btn-danger');
 	}, 2500);
@@ -243,10 +243,10 @@ function flashTie(p1Hand, p2Hand) {
 	p1Hand.classList.remove('disabled');
 	p2Hand.classList.remove('disabled');
 
-	setTimeout(function() { p1Hand.classList.add('btn-outline-secondary') }, 500);
-	setTimeout(function() { p1Hand.classList.remove('btn-outline-secondary') }, 1000);
-	setTimeout(function() { p2Hand.classList.add('btn-outline-secondary') }, 500);
-	setTimeout(function() { p2Hand.classList.remove('btn-outline-secondary') }, 1000);
+	setTimeout(()=> { p1Hand.classList.add('btn-outline-secondary') }, 500);
+	setTimeout(()=> { p1Hand.classList.remove('btn-outline-secondary') }, 1000);
+	setTimeout(()=> { p2Hand.classList.add('btn-outline-secondary') }, 500);
+	setTimeout(()=> { p2Hand.classList.remove('btn-outline-secondary') }, 1000);
 }
 
 // - Determine winner, apply points
@@ -287,7 +287,7 @@ function scoreRound(){
 			break;
 	}
 
-	setTimeout(function() {
+	setTimeout(()=> {
 		display.elements.score.innerHTML = '<span class="bigger-text">' + p1.score + '</span> vs <span class="bigger-text">' + p2.score + '</span';
 		startRound();
 	}, 2500);
