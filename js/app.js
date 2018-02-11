@@ -106,6 +106,7 @@ function startRound() {
 	}
 }
 
+// - Start the game and input listeners, or end it and create back/reset buttons
 function setListeners(bool) {
 	p1.listener = bool;
 	p2.listener = bool;
@@ -117,9 +118,7 @@ function audioSlap() {
 	display.audio.play();
 }
 
-
-
-// - Shake hands, show pts, show round is starting
+// - Shake each hand, display pts, show round is starting
 function shakeHands() {
 	let scoreLayout = Math.floor(Math.random() * 6);
 	switch (scoreLayout) {
@@ -156,7 +155,7 @@ function shakeHands() {
 	}
 }
 
-// - Disable thisPlayer inputs, score if thatPlayer ready
+// - Disable thisPlayer's inputs, score if thatPlayer is also ready
 function disablePlayer(thisPlayer, theirChoice, thatPlayer) {
 	thisPlayer.choice = theirChoice;
 	thisPlayer.elements.rock.classList.add('disabled');
@@ -170,35 +169,52 @@ function disablePlayer(thisPlayer, theirChoice, thatPlayer) {
 	}
 }
 
-// - Create Back & Reset buttons
-function createButtons() {
-	let resetButtons = document.getElementById('reset-buttons');
-	let resetBtn = document.createElement('button');
-	let backBtn = document.createElement('button');
+// - Determine winner, apply points
+function scoreRound() {
+	switch (p1.choice) {
+		case 'q': 										//P1 - ROCK
+			if (p2.choice == 'i') { 					//P2 - ROCK
+				flashTie(p1.elements.rock, p2.elements.rock);
+			} else if (p2.choice == 'o') { 		//P2 - PAPER
+				p2.score += display.score.paper;
+				flashWinningPlayer(p2.elements.paper, p1.elements.rock, display.elements.paper);
+			} else {													//P2 - SCISSORS
+				p1.score += display.score.rock;
+				flashWinningPlayer(p1.elements.rock, p2.elements.scissors, display.elements.rock);
+			}
+			break;
+		case 'w': 										//P1 - PAPER
+			if (p2.choice == 'i') { 					//P2 - ROCK
+				p1.score += display.score.paper;
+				flashWinningPlayer(p1.elements.paper, p2.elements.rock, display.elements.paper);
+			} else if (p2.choice == 'o') { 		//P2 - PAPER
+				flashTie(p1.elements.paper, p2.elements.paper);
+			} else {													//P2 - SCISSORS
+				p2.score += display.score.scissors;
+				flashWinningPlayer(p2.elements.scissors, p1.elements.paper, display.elements.scissors);
+			}
+			break;
+		case 'e': 										//P1 - SCISSORS
+			if (p2.choice == 'i') { 					//P2 - ROCK
+				p2.score += display.score.rock;
+				flashWinningPlayer(p2.elements.rock, p1.elements.scissors, display.elements.rock);
+			} else if (p2.choice == 'o') { 		//P2 - PAPER
+				p1.score += display.score.scissors;
+				flashWinningPlayer(p1.elements.scissors, p2.elements.paper, display.elements.scissors);
+			} else {													//P2 - SCISSORS
+				flashTie(p1.elements.scissors, p2.elements.scissors);
+			}
+			break;
+	}
 
-	resetButtons.style.textAlign = 'center';
-	backBtn.style.margin = '1vh';
-	resetBtn.style.margin = '1vh';
-
-	backBtn.classList.add('btn-danger');
-	backBtn.classList.add('btn-lg');
-	backBtn.classList.add('btn');
-	backBtn.innerText = 'BACK';
-
-	resetBtn.classList.add('btn-success');
-	resetBtn.classList.add('btn-lg');
-	resetBtn.classList.add('btn');
-	resetBtn.innerText = 'RESET';
-
-	// - Attach to col-2 div and listen for clicks
-	resetButtons.appendChild(backBtn);
-	resetButtons.appendChild(resetBtn);
-	resetBtn.addEventListener('click', ()=> { window.location = 'game.html' });
-	backBtn.addEventListener('click', ()=> { window.location = 'index.html' });
+	setTimeout(()=> {
+		display.elements.score.innerHTML = '<span class="bigger-text">' + p1.score + '</span> vs <span class="bigger-text">' + p2.score + '</span>';
+		startRound();
+	}, 2500);
 }
 
 // - Flash winning hand button, and bold winning hand pts value
-function flashWinningP(winningHand, losingHand, handScore) {
+function flashWinningPlayer(winningHand, losingHand, handScore) {
 	handScore.style.fontWeight = 900;
 	setTimeout(()=> { display.audioWin.play() }, 250);
 
@@ -234,48 +250,31 @@ function flashTie(p1Hand, p2Hand) {
 	}, 1000);
 }
 
-// - Determine winner, apply points
-function scoreRound(){
-	switch (p1.choice) {
-		case 'q': 										//P1 - ROCK
-			if (p2.choice == 'i') { 					//P2 - ROCK
-				flashTie(p1.elements.rock, p2.elements.rock);
-			} else if (p2.choice == 'o') { 		//P2 - PAPER
-				p2.score += display.score.paper;
-				flashWinningP(p2.elements.paper, p1.elements.rock, display.elements.paper);
-			} else {													//P2 - SCISSORS
-				p1.score += display.score.rock;
-				flashWinningP(p1.elements.rock, p2.elements.scissors, display.elements.rock);
-			}
-			break;
-		case 'w': 										//P1 - PAPER
-			if (p2.choice == 'i') { 					//P2 - ROCK
-				p1.score += display.score.paper;
-				flashWinningP(p1.elements.paper, p2.elements.rock, display.elements.paper);
-			} else if (p2.choice == 'o') { 		//P2 - PAPER
-				flashTie(p1.elements.paper, p2.elements.paper);
-			} else {													//P2 - SCISSORS
-				p2.score += display.score.scissors;
-				flashWinningP(p2.elements.scissors, p1.elements.paper, display.elements.scissors);
-			}
-			break;
-		case 'e': 										//P1 - SCISSORS
-			if (p2.choice == 'i') { 					//P2 - ROCK
-				p2.score += display.score.rock;
-				flashWinningP(p2.elements.rock, p1.elements.scissors, display.elements.rock);
-			} else if (p2.choice == 'o') { 		//P2 - PAPER
-				p1.score += display.score.scissors;
-				flashWinningP(p1.elements.scissors, p2.elements.paper, display.elements.scissors);
-			} else {													//P2 - SCISSORS
-				flashTie(p1.elements.scissors, p2.elements.scissors);
-			}
-			break;
-	}
+// - Create Back & Reset buttons
+function createButtons() {
+	let resetButtons = document.getElementById('reset-buttons');
+	let resetBtn = document.createElement('button');
+	let backBtn = document.createElement('button');
 
-	setTimeout(()=> {
-		display.elements.score.innerHTML = '<span class="bigger-text">' + p1.score + '</span> vs <span class="bigger-text">' + p2.score + '</span>';
-		startRound();
-	}, 2500);
+	resetButtons.style.textAlign = 'center';
+	backBtn.style.margin = '1vh';
+	resetBtn.style.margin = '1vh';
+
+	backBtn.classList.add('btn-danger');
+	backBtn.classList.add('btn-lg');
+	backBtn.classList.add('btn');
+	backBtn.innerText = 'BACK';
+
+	resetBtn.classList.add('btn-success');
+	resetBtn.classList.add('btn-lg');
+	resetBtn.classList.add('btn');
+	resetBtn.innerText = 'RESET';
+
+	// - Attach to the empty col-2 div and listen for clicks
+	resetButtons.appendChild(backBtn);
+	resetButtons.appendChild(resetBtn);
+	resetBtn.addEventListener('click', ()=> { window.location = 'game.html' });
+	backBtn.addEventListener('click', ()=> { window.location = 'index.html' });
 }
 
 // - Create player and display objects

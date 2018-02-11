@@ -1,14 +1,6 @@
 console.log('appSplit.js loaded');
-
-let p1 = new Player(1);
-let p2 = new Player(2);
-
-let display = new Display();
-displayElements(display);
-
-// - Start the game after a short delay
-setTimeout(() => { startRound() }, 333);
-
+// CONTSTRUCTOR FUNCTIONS
+// - Player
 function Player(id) {
 	this.id = id;
 	this.score = 0;
@@ -28,10 +20,60 @@ function Player(id) {
 	};
 	this.scoringElements.all = [ this.scoringElements.rock, this.scoringElements.paper, this.scoringElements.scissors ];
 }
+// - Called when a player wins the game
+Player.prototype.gameWinner = function() {
+	setListeners(false);
+	p1.scoringElements.rock.innerText = 'PLAYER';
+	p1.scoringElements.paper.innerText = this.id;
+	p1.scoringElements.scissors.innerText = 'WINS';
+	p1.scoringElements.paper.style.fontWeight = 900;
+
+	p2.scoringElements.rock.innerText = 'PLAYER';
+	p2.scoringElements.paper.innerText = this.id;
+	p2.scoringElements.scissors.innerText = 'WINS';
+	p2.scoringElements.paper.style.fontWeight = 900;
+
+	this.elements.rock.classList.add('btn-success');
+	this.elements.paper.classList.add('btn-success');
+	this.elements.scissors.classList.add('btn-success');
+};
+// - Called to set pts for round
+Player.prototype.scoreLayout = function() {
+	let scoreLayout = Math.floor(Math.random() * 6);
+	switch (scoreLayout) {
+		case 0:
+			this.scoring = { rock: 1, paper: 2, scissors: 3, all: [] };
+			break;
+		case 1:
+			this.scoring = { rock: 1, paper: 3, scissors: 2, all: [] };
+			break;
+		case 2:
+			this.scoring = { rock: 2, paper: 1, scissors: 3, all: [] };
+			break;
+		case 3:
+			this.scoring = { rock: 2, paper: 3, scissors: 1, all: [] };
+			break;
+		case 4:
+			this.scoring = { rock: 3, paper: 1, scissors: 2, all: [] };
+			break;
+		case 5:
+			this.scoring = { rock: 3, paper: 2, scissors: 1, all: [] };
+			break;
+	}
+	this.scoring.all = [ this.scoring.rock, this.scoring.paper, this.scoring.scissors ];
+}
 
 function Display() {
 	this.rounds = 0;
-	this.elements = {};
+	this.elements = {
+		score: document.getElementById('score-text'),
+		round: document.getElementById('round-text'),
+		rock: document.getElementById('rock-score'),
+		paper: document.getElementById('paper-score'),
+		scissors: document.getElementById('scissors-score')
+	};
+	this.elements.all = [ this.elements.rock, this.elements.paper, this.elements.scissors ];
+	this.audioWin = new Audio('audio/Whpsh.m4a');
 
 	// - Key press listener
 	document.addEventListener('keyup', function(event) {
@@ -79,16 +121,6 @@ function Display() {
 	});
 }
 
-function displayElements(thisDisplay) {
-	thisDisplay.elements.score = document.getElementById('score-text');
-	thisDisplay.elements.round = document.getElementById('round-text');
-	thisDisplay.elements.rock = document.getElementById('rock-score');
-	thisDisplay.elements.paper = document.getElementById('paper-score');
-	thisDisplay.elements.scissors = document.getElementById('scissors-score');
-	thisDisplay.elements.all = [ thisDisplay.elements.rock, thisDisplay.elements.paper, thisDisplay.elements.scissors ];
-	thisDisplay.audioWin = new Audio('audio/Whpsh.m4a');
-}
-
 function startRound() {
 	display.rounds++;
 	display.elements.round.innerText = display.rounds;
@@ -103,9 +135,9 @@ function startRound() {
 
 	// - Check if winner - else play!
 	if (p1.score >= 10) {
-		gameWinner(p1);
+		p1.gameWinner();
 	} else if (p2.score >= 10) {
-		gameWinner(p2);
+		p2.gameWinner();
 	} else {
 		// - Rock, Paper, Scissors!
 		setListeners(true);
@@ -123,52 +155,10 @@ function audioSlap() {
 	display.audio.play();
 }
 
-function gameWinner(thisPlayer) {
-	setListeners(false);
-	p1.scoringElements.rock.innerText = 'PLAYER';
-	p1.scoringElements.paper.innerText = thisPlayer.id;
-	p1.scoringElements.scissors.innerText = 'WINS';
-	p1.scoringElements.paper.style.fontWeight = 900;
-
-	p2.scoringElements.rock.innerText = 'PLAYER';
-	p2.scoringElements.paper.innerText = thisPlayer.id;
-	p2.scoringElements.scissors.innerText = 'WINS';
-	p2.scoringElements.paper.style.fontWeight = 900;
-
-	thisPlayer.elements.rock.classList.add('btn-success');
-	thisPlayer.elements.paper.classList.add('btn-success');
-	thisPlayer.elements.scissors.classList.add('btn-success');
-}
-
-function scoreLayout(thisPlayer) {
-	let scoreLayout = Math.floor(Math.random() * 6);
-	switch (scoreLayout) {
-		case 0:
-			thisPlayer.scoring = { rock: 1, paper: 2, scissors: 3, all: [] };
-			break;
-		case 1:
-			thisPlayer.scoring = { rock: 1, paper: 3, scissors: 2, all: [] };
-			break;
-		case 2:
-			thisPlayer.scoring = { rock: 2, paper: 1, scissors: 3, all: [] };
-			break;
-		case 3:
-			thisPlayer.scoring = { rock: 2, paper: 3, scissors: 1, all: [] };
-			break;
-		case 4:
-			thisPlayer.scoring = { rock: 3, paper: 1, scissors: 2, all: [] };
-			break;
-		case 5:
-			thisPlayer.scoring = { rock: 3, paper: 2, scissors: 1, all: [] };
-			break;
-	}
-	thisPlayer.scoring.all = [ thisPlayer.scoring.rock, thisPlayer.scoring.paper, thisPlayer.scoring.scissors ];
-}
-
 // - Shake hands, show pts, show round is starting
 function shakeHands() {
-	scoreLayout(p1);
-	scoreLayout(p2);
+	p1.scoreLayout();
+	p2.scoreLayout();
 
 	// - Shake animation for each hand img over period of 1 sec
 	for (let i = 0; i < 3; i++) {
@@ -228,7 +218,7 @@ function createButtons() {
 
 
 // - Bold winning hand pts value, flash Winner's hand button
-function flashWinningP(winningHand, losingHand, handScore) {
+function flashWinningPlayer(winningHand, losingHand, handScore) {
 	handScore.style.fontWeight = 900;
 	setTimeout(function() { display.audioWin.play(); }, 250);
 
@@ -271,30 +261,30 @@ function scoreRound(){
 				flashTie(p1.elements.rock, p2.elements.rock);
 			} else if (p2.choice == 'o') {
 				p2.score += p2.scoring.paper;
-				flashWinningP(p2.elements.paper, p1.elements.rock, p2.scoringElements.paper);
+				flashWinningPlayer(p2.elements.paper, p1.elements.rock, p2.scoringElements.paper);
 			} else {
 				p1.score += p1.scoring.rock;
-				flashWinningP(p1.elements.rock, p2.elements.scissors, p1.scoringElements.rock);
+				flashWinningPlayer(p1.elements.rock, p2.elements.scissors, p1.scoringElements.rock);
 			}
 			break;
 		case 'w':
 			if (p2.choice == 'i') {
 				p1.score += p1.scoring.paper;
-				flashWinningP(p1.elements.paper, p2.elements.rock, p1.scoringElements.paper);
+				flashWinningPlayer(p1.elements.paper, p2.elements.rock, p1.scoringElements.paper);
 			} else if (p2.choice == 'o') {
 				flashTie(p1.elements.paper, p2.elements.paper);
 			} else {
 				p2.score += p2.scoring.scissors;
-				flashWinningP(p2.elements.scissors, p1.elements.paper, p2.scoringElements.scissors);
+				flashWinningPlayer(p2.elements.scissors, p1.elements.paper, p2.scoringElements.scissors);
 			}
 			break;
 		case 'e':
 			if (p2.choice == 'i') {
 				p2.score += p2.scoring.rock;
-				flashWinningP(p2.elements.rock, p1.elements.scissors, p2.scoringElements.rock);
+				flashWinningPlayer(p2.elements.rock, p1.elements.scissors, p2.scoringElements.rock);
 			} else if (p2.choice == 'o') {
 				p1.score += p1.scoring.scissors;
-				flashWinningP(p1.elements.scissors, p2.elements.paper, p1.scoringElements.scissors);
+				flashWinningPlayer(p1.elements.scissors, p2.elements.paper, p1.scoringElements.scissors);
 			} else {
 				flashTie(p1.elements.scissors, p2.elements.scissors);
 			}
@@ -306,3 +296,11 @@ function scoreRound(){
 		startRound();
 	}, 2500);
 }
+
+// - Create player and display objects
+let p1 = new Player(1);
+let p2 = new Player(2);
+let display = new Display();
+
+// - Start the game after a short delay
+setTimeout(()=> { startRound() }, 333);
