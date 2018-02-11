@@ -256,19 +256,17 @@ function createButtons() {
 	let resetBtn = document.createElement('button');
 	let backBtn = document.createElement('button');
 
-	resetButtons.style.textAlign = 'center';
-	backBtn.style.margin = '1vh';
-	resetBtn.style.margin = '1vh';
-
 	backBtn.classList.add('btn-danger');
 	backBtn.classList.add('btn-lg');
 	backBtn.classList.add('btn');
 	backBtn.innerText = 'BACK';
+	backBtn.style.margin = '1vh';
 
 	resetBtn.classList.add('btn-success');
 	resetBtn.classList.add('btn-lg');
 	resetBtn.classList.add('btn');
 	resetBtn.innerText = 'RESET';
+	resetBtn.style.margin = '1vh';
 
 	// - Attach to the empty col-2 div and listen for clicks
 	resetButtons.appendChild(backBtn);

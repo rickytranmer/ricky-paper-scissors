@@ -193,7 +193,6 @@ function createButtons() {
 	let resetBtn = document.createElement('button');
 	let backBtn = document.createElement('button');
 
-	resetButtons.style.textAlign = 'center';
 	backBtn.style.margin = '1vh';
 	resetBtn.style.margin = '1vh';
 
