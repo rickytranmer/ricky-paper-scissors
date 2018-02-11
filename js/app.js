@@ -11,16 +11,16 @@ function Player(id) {
 		paper: document.getElementById(this.id + 'paper'),
 		scissors: document.getElementById(this.id + 'scissors')
 	};
-}
-Player.prototype.gameWinner = function() {
-	setListeners(false);
-	display.elements.rock.innerText = 'PLAYER';
-	display.elements.paper.innerText = this.id;
-	display.elements.scissors.innerText = 'WINS';
-	display.elements.paper.style.fontWeight = 900;
-	this.elements.rock.classList.add('btn-success');
-	this.elements.paper.classList.add('btn-success');
-	this.elements.scissors.classList.add('btn-success');
+	this.gameWinner = ()=> {
+		setListeners(false);
+		display.elements.rock.innerText = 'PLAYER';
+		display.elements.paper.innerText = this.id;
+		display.elements.scissors.innerText = 'WINS';
+		display.elements.paper.style.fontWeight = 900;
+		this.elements.rock.classList.add('btn-success');
+		this.elements.paper.classList.add('btn-success');
+		this.elements.scissors.classList.add('btn-success');
+	}
 }
 
 // - Display (counters, display elements, and event listeners)
@@ -151,7 +151,7 @@ function shakeHands() {
 			audioSlap();
 		}, i*333);
 		// - Reset hand animation
-		setTimeout(() => { document.querySelectorAll('img')[i].style.animation = '' }, 1000-(i*333));
+		setTimeout(()=> { document.querySelectorAll('img')[i].style.animation = '' }, 1000-(i*333));
 	}
 }
 

@@ -19,48 +19,46 @@ function Player(id) {
 		all: []
 	};
 	this.scoringElements.all = [ this.scoringElements.rock, this.scoringElements.paper, this.scoringElements.scissors ];
-}
-// - Called when a player wins the game
-Player.prototype.gameWinner = function() {
-	setListeners(false);
-	p1.scoringElements.rock.innerText = 'PLAYER';
-	p1.scoringElements.paper.innerText = this.id;
-	p1.scoringElements.scissors.innerText = 'WINS';
-	p1.scoringElements.paper.style.fontWeight = 900;
+	this.gameWinner = ()=> {
+		setListeners(false);
+		p1.scoringElements.rock.innerText = 'PLAYER';
+		p1.scoringElements.paper.innerText = this.id;
+		p1.scoringElements.scissors.innerText = 'WINS';
+		p1.scoringElements.paper.style.fontWeight = 900;
 
-	p2.scoringElements.rock.innerText = 'PLAYER';
-	p2.scoringElements.paper.innerText = this.id;
-	p2.scoringElements.scissors.innerText = 'WINS';
-	p2.scoringElements.paper.style.fontWeight = 900;
+		p2.scoringElements.rock.innerText = 'PLAYER';
+		p2.scoringElements.paper.innerText = this.id;
+		p2.scoringElements.scissors.innerText = 'WINS';
+		p2.scoringElements.paper.style.fontWeight = 900;
 
-	this.elements.rock.classList.add('btn-success');
-	this.elements.paper.classList.add('btn-success');
-	this.elements.scissors.classList.add('btn-success');
-};
-// - Called to set pts for round
-Player.prototype.scoreLayout = function() {
-	let scoreLayout = Math.floor(Math.random() * 6);
-	switch (scoreLayout) {
-		case 0:
-			this.scoring = { rock: 1, paper: 2, scissors: 3, all: [] };
-			break;
-		case 1:
-			this.scoring = { rock: 1, paper: 3, scissors: 2, all: [] };
-			break;
-		case 2:
-			this.scoring = { rock: 2, paper: 1, scissors: 3, all: [] };
-			break;
-		case 3:
-			this.scoring = { rock: 2, paper: 3, scissors: 1, all: [] };
-			break;
-		case 4:
-			this.scoring = { rock: 3, paper: 1, scissors: 2, all: [] };
-			break;
-		case 5:
-			this.scoring = { rock: 3, paper: 2, scissors: 1, all: [] };
-			break;
+		this.elements.rock.classList.add('btn-success');
+		this.elements.paper.classList.add('btn-success');
+		this.elements.scissors.classList.add('btn-success');
 	}
-	this.scoring.all = [ this.scoring.rock, this.scoring.paper, this.scoring.scissors ];
+	this.scoreLayout = ()=> {
+		let scoreLayout = Math.floor(Math.random() * 6);
+		switch (scoreLayout) {
+			case 0:
+				this.scoring = { rock: 1, paper: 2, scissors: 3, all: [] };
+				break;
+			case 1:
+				this.scoring = { rock: 1, paper: 3, scissors: 2, all: [] };
+				break;
+			case 2:
+				this.scoring = { rock: 2, paper: 1, scissors: 3, all: [] };
+				break;
+			case 3:
+				this.scoring = { rock: 2, paper: 3, scissors: 1, all: [] };
+				break;
+			case 4:
+				this.scoring = { rock: 3, paper: 1, scissors: 2, all: [] };
+				break;
+			case 5:
+				this.scoring = { rock: 3, paper: 2, scissors: 1, all: [] };
+				break;
+		}
+		this.scoring.all = [ this.scoring.rock, this.scoring.paper, this.scoring.scissors ];
+	}
 }
 
 function Display() {
@@ -87,34 +85,34 @@ function Display() {
 	});
 
 	// - Player 1 button inputs
-	p1.elements.rock.addEventListener('click', function() {
+	p1.elements.rock.addEventListener('click', ()=> {
 		if (p1.listener) {
 			disablePlayer(p1, 'q', p2);
 		}
 	});
-	p1.elements.paper.addEventListener('click', function() {
+	p1.elements.paper.addEventListener('click', ()=> {
 		if (p1.listener) {
 			disablePlayer(p1, 'w', p2);
 		}
 	});
-	p1.elements.scissors.addEventListener('click', function() {
+	p1.elements.scissors.addEventListener('click', ()=> {
 		if (p1.listener) {
 			disablePlayer(p1, 'e', p2);
 		}
 	});
 	
 	// - Player 2 button inputs
-	p2.elements.rock.addEventListener('click', function() {
+	p2.elements.rock.addEventListener('click', ()=> {
 		if (p2.listener) {
 			disablePlayer(p2, 'i', p1);
 		}
 	});
-	p2.elements.paper.addEventListener('click', function() {
+	p2.elements.paper.addEventListener('click', ()=> {
 		if (p2.listener) {
 			disablePlayer(p2, 'o', p1);
 		} 
 	});
-	p2.elements.scissors.addEventListener('click', function() {
+	p2.elements.scissors.addEventListener('click', ()=> {
 		if (p2.listener) {
 			disablePlayer(p2, 'p', p1);
 		}
@@ -162,7 +160,7 @@ function shakeHands() {
 
 	// - Shake animation for each hand img over period of 1 sec
 	for (let i = 0; i < 3; i++) {
-		setTimeout(function() {
+		setTimeout(()=> {
 			p1.scoringElements.all[i].innerText = p1.scoring.all[i];
 			p2.scoringElements.all[i].innerText = p2.scoring.all[i];
 			document.querySelectorAll('img')[i].style.animation = 'upDown .33s';
@@ -212,31 +210,31 @@ function createButtons() {
 	// - Attach to col-2 div and listen for clicks
 	resetButtons.appendChild(backBtn);
 	resetButtons.appendChild(resetBtn);
-	resetBtn.addEventListener('click', function(){ window.location = 'gameSplit.html' });
-	backBtn.addEventListener('click', function(){ window.location = 'index.html' });
+	resetBtn.addEventListener('click', ()=>{ window.location = 'gameSplit.html' });
+	backBtn.addEventListener('click', ()=>{ window.location = 'index.html' });
 }
 
 
 // - Bold winning hand pts value, flash Winner's hand button
 function flashWinningPlayer(winningHand, losingHand, handScore) {
 	handScore.style.fontWeight = 900;
-	setTimeout(function() { display.audioWin.play(); }, 250);
+	setTimeout(()=> { display.audioWin.play(); }, 250);
 
 	winningHand.classList.remove('disabled');
 	winningHand.classList.add('btn-success');
 	losingHand.classList.remove('disabled');
 	losingHand.classList.add('btn-danger');
 
-	setTimeout(function() { winningHand.classList.add('btn-outline-success'); }, 500);
-	setTimeout(function() { winningHand.classList.remove('btn-outline-success'); }, 1000);
-	setTimeout(function() { winningHand.classList.add('btn-outline-success'); }, 1500);
-	setTimeout(function() {
+	setTimeout(()=> { winningHand.classList.add('btn-outline-success'); }, 500);
+	setTimeout(()=> { winningHand.classList.remove('btn-outline-success'); }, 1000);
+	setTimeout(()=> { winningHand.classList.add('btn-outline-success'); }, 1500);
+	setTimeout(()=> {
 		winningHand.classList.remove('btn-outline-success');
 		handScore.style.fontWeight = 400;
 	}, 2000);
 
 	// - Prepare for next round
-	setTimeout(function() {
+	setTimeout(()=> {
 		winningHand.classList.remove('btn-success');
 		losingHand.classList.remove('btn-danger');
 	}, 2500)
@@ -247,10 +245,10 @@ function flashTie(p1Hand, p2Hand) {
 	p1Hand.classList.remove('disabled');
 	p2Hand.classList.remove('disabled');
 
-	setTimeout(function() { p1Hand.classList.add('btn-outline-secondary'); }, 500);
-	setTimeout(function() { p1Hand.classList.remove('btn-outline-secondary'); }, 1000);
-	setTimeout(function() { p2Hand.classList.add('btn-outline-secondary'); }, 500);
-	setTimeout(function() { p2Hand.classList.remove('btn-outline-secondary'); }, 1000);
+	setTimeout(()=> { p1Hand.classList.add('btn-outline-secondary'); }, 500);
+	setTimeout(()=> { p1Hand.classList.remove('btn-outline-secondary'); }, 1000);
+	setTimeout(()=> { p2Hand.classList.add('btn-outline-secondary'); }, 500);
+	setTimeout(()=> { p2Hand.classList.remove('btn-outline-secondary'); }, 1000);
 }
 
 // - Determine winner, apply points
@@ -291,7 +289,7 @@ function scoreRound(){
 			break;
 	}
 
-	setTimeout(function() {
+	setTimeout(()=> {
 		display.elements.score.innerHTML = '<span class="bigger-text">' + p1.score + '</span> vs <span class="bigger-text">' + p2.score + '</span';
 		startRound();
 	}, 2500);
