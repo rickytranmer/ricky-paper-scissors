@@ -2,8 +2,8 @@ console.log('appSplit.js loaded');
 
 let p1 = new Player(1);
 let p2 = new Player(2);
-playerElements(p1);
-playerElements(p2);
+// playerElements(p1);
+// playerElements(p2);
 
 let display = new Display();
 displayElements(display);
@@ -16,23 +16,38 @@ function Player(id) {
 	this.score = 0;
 	this.choice = 0;
 	this.listener = false;
-	this.elements = {};
-	this.scoring = { rock: 1, paper: 1, scissors: 1, all: [], elements: {} };
-}
-function playerElements(thisPlayer) {
-	thisPlayer.elements = {
-		rock: document.getElementById(thisPlayer.id + 'rock'),
-		paper: document.getElementById(thisPlayer.id + 'paper'),
-		scissors: document.getElementById(thisPlayer.id + 'scissors')
+	this.elements = {
+		rock: document.getElementById(this.id + 'rock'),
+		paper: document.getElementById(this.id + 'paper'),
+		scissors: document.getElementById(this.id + 'scissors')
 	};
-	thisPlayer.scoring.elements = {
-		rock: document.getElementById('rock-score' + thisPlayer.id),
-		paper: document.getElementById('paper-score' + thisPlayer.id),
-		scissors: document.getElementById('scissors-score' + thisPlayer.id),
-		all: []
-	};
-	thisPlayer.scoring.elements.all = [ thisPlayer.scoring.elements.rock, thisPlayer.scoring.elements.paper, thisPlayer.scoring.elements.scissors ]
+	this.scoring = { rock: 1, paper: 1, scissors: 1, all: [] };
+	// setTimeout(()=> {
+		this.scoringElements = {
+			rock: document.getElementById('rock-score' + this.id),
+			paper: document.getElementById('paper-score' + this.id),
+			scissors: document.getElementById('scissors-score' + this.id),
+			all: []
+		};
+		this.scoringElements.all = [ this.scoringElements.rock, this.scoringElements.paper, this.scoringElements.scissors ];
+		console.log(this);
+	// }, 250);
+
 }
+// function playerElements(thisPlayer) {
+// 	thisPlayer.elements = {
+// 		rock: document.getElementById(thisPlayer.id + 'rock'),
+// 		paper: document.getElementById(thisPlayer.id + 'paper'),
+// 		scissors: document.getElementById(thisPlayer.id + 'scissors')
+// 	};
+// 	thisPlayer.scoringElements = {
+// 		rock: document.getElementById('rock-score' + thisPlayer.id),
+// 		paper: document.getElementById('paper-score' + thisPlayer.id),
+// 		scissors: document.getElementById('scissors-score' + thisPlayer.id),
+// 		all: []
+// 	};
+// 	thisPlayer.scoringElements.all = [ thisPlayer.scoringElements.rock, thisPlayer.scoringElements.paper, thisPlayer.scoringElements.scissors ]
+// }
 
 function Display() {
 	this.rounds = 0;
@@ -130,15 +145,15 @@ function audioSlap() {
 
 function gameWinner(thisPlayer) {
 	setListeners(false);
-	p1.scoring.elements.rock.innerText = 'PLAYER';
-	p1.scoring.elements.paper.innerText = thisPlayer.id;
-	p1.scoring.elements.scissors.innerText = 'WINS';
-	p1.scoring.elements.paper.style.fontWeight = 900;
+	p1.scoringElements.rock.innerText = 'PLAYER';
+	p1.scoringElements.paper.innerText = thisPlayer.id;
+	p1.scoringElements.scissors.innerText = 'WINS';
+	p1.scoringElements.paper.style.fontWeight = 900;
 
-	p2.scoring.elements.rock.innerText = 'PLAYER';
-	p2.scoring.elements.paper.innerText = thisPlayer.id;
-	p2.scoring.elements.scissors.innerText = 'WINS';
-	p2.scoring.elements.paper.style.fontWeight = 900;
+	p2.scoringElements.rock.innerText = 'PLAYER';
+	p2.scoringElements.paper.innerText = thisPlayer.id;
+	p2.scoringElements.scissors.innerText = 'WINS';
+	p2.scoringElements.paper.style.fontWeight = 900;
 
 	thisPlayer.elements.rock.classList.add('btn-success');
 	thisPlayer.elements.paper.classList.add('btn-success');
@@ -173,15 +188,16 @@ function scoreLayout(thisPlayer) {
 // - Shake hands, show pts, show round is starting
 function shakeHands() {
 	scoreLayout(p1);
-	playerElements(p1);
+	// playerElements(p1);
 	scoreLayout(p2);
-	playerElements(p2);
+	// playerElements(p2);
+	console.log(p1.scoring);
 
 	// - Shake animation for each hand img over period of 1 sec
 	for (let i = 0; i < 3; i++) {
 		setTimeout(function() {
-			p1.scoring.elements.all[i].innerText = p1.scoring.all[i];
-			p2.scoring.elements.all[i].innerText = p2.scoring.all[i];
+			p1.scoringElements.all[i].innerText = p1.scoring.all[i];
+			p2.scoringElements.all[i].innerText = p2.scoring.all[i];
 			document.querySelectorAll('img')[i].style.animation = 'upDown .33s';
 			document.querySelectorAll('img')[i+3].style.animation = 'upDown .33s';
 			audioSlap();
@@ -278,30 +294,30 @@ function scoreRound(){
 				flashTie(p1.elements.rock, p2.elements.rock);
 			} else if (p2.choice == 'o') {
 				p2.score += p2.scoring.paper;
-				flashWinningP(p2.elements.paper, p1.elements.rock, p2.scoring.elements.paper);
+				flashWinningP(p2.elements.paper, p1.elements.rock, p2.scoringElements.paper);
 			} else {
 				p1.score += p1.scoring.rock;
-				flashWinningP(p1.elements.rock, p2.elements.scissors, p1.scoring.elements.rock);
+				flashWinningP(p1.elements.rock, p2.elements.scissors, p1.scoringElements.rock);
 			}
 			break;
 		case 'w':
 			if (p2.choice == 'i') {
 				p1.score += p1.scoring.paper;
-				flashWinningP(p1.elements.paper, p2.elements.rock, p1.scoring.elements.paper);
+				flashWinningP(p1.elements.paper, p2.elements.rock, p1.scoringElements.paper);
 			} else if (p2.choice == 'o') {
 				flashTie(p1.elements.paper, p2.elements.paper);
 			} else {
 				p2.score += p2.scoring.scissors;
-				flashWinningP(p2.elements.scissors, p1.elements.paper, p2.scoring.elements.scissors);
+				flashWinningP(p2.elements.scissors, p1.elements.paper, p2.scoringElements.scissors);
 			}
 			break;
 		case 'e':
 			if (p2.choice == 'i') {
 				p2.score += p2.scoring.rock;
-				flashWinningP(p2.elements.rock, p1.elements.scissors, p2.scoring.elements.rock);
+				flashWinningP(p2.elements.rock, p1.elements.scissors, p2.scoringElements.rock);
 			} else if (p2.choice == 'o') {
 				p1.score += p1.scoring.scissors;
-				flashWinningP(p1.elements.scissors, p2.elements.paper, p1.scoring.elements.scissors);
+				flashWinningP(p1.elements.scissors, p2.elements.paper, p1.scoringElements.scissors);
 			} else {
 				flashTie(p1.elements.scissors, p2.elements.scissors);
 			}
