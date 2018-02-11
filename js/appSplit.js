@@ -193,9 +193,6 @@ function createButtons() {
 	let resetBtn = document.createElement('button');
 	let backBtn = document.createElement('button');
 
-	backBtn.style.margin = '1vh';
-	resetBtn.style.margin = '1vh';
-
 	backBtn.classList.add('btn-danger');
 	backBtn.classList.add('btn-lg');
 	backBtn.classList.add('btn');

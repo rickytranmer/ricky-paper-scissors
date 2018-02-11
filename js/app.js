@@ -86,6 +86,7 @@ function Display() {
 function startRound() {
 	display.rounds++;
 	display.elements.round.innerText = display.rounds;
+	display.elements.score.innerHTML = '<span class="bigger-text">' + p1.score + '</span> vs <span class="bigger-text">' + p2.score + '</span>';
 	
 	// - Reset hand input classes
 	p1.elements.rock.classList.remove('disabled');
@@ -207,10 +208,7 @@ function scoreRound() {
 			break;
 	}
 
-	setTimeout(()=> {
-		display.elements.score.innerHTML = '<span class="bigger-text">' + p1.score + '</span> vs <span class="bigger-text">' + p2.score + '</span>';
-		startRound();
-	}, 2500);
+	setTimeout(()=> { startRound() }, 2250);
 }
 
 // - Flash winning hand button, and bold winning hand pts value
@@ -260,13 +258,11 @@ function createButtons() {
 	backBtn.classList.add('btn-lg');
 	backBtn.classList.add('btn');
 	backBtn.innerText = 'BACK';
-	backBtn.style.margin = '1vh';
 
 	resetBtn.classList.add('btn-success');
 	resetBtn.classList.add('btn-lg');
 	resetBtn.classList.add('btn');
 	resetBtn.innerText = 'RESET';
-	resetBtn.style.margin = '1vh';
 
 	// - Attach to the empty col-2 div and listen for clicks
 	resetButtons.appendChild(backBtn);
