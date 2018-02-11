@@ -2,11 +2,7 @@ console.log('app.js loaded');
 
 let p1 = new Player(1);
 let p2 = new Player(2);
-playerElements(p1);
-playerElements(p2);
-
 let display = new Display();
-displayElements(display);
 
 // - Start the game after a short delay
 setTimeout(() => { startRound() }, 333);
@@ -17,14 +13,10 @@ function Player(id) {
 	this.score = 0;
 	this.choice = '';
 	this.listener = false;
-	this.elements = {};
-}
-// - Player hand inputs
-function playerElements(thisPlayer) {
-	thisPlayer.elements = {
-		rock: document.getElementById(thisPlayer.id + 'rock'),
-		paper: document.getElementById(thisPlayer.id + 'paper'),
-		scissors: document.getElementById(thisPlayer.id + 'scissors')
+	this.elements = {
+		rock: document.getElementById(this.id + 'rock'),
+		paper: document.getElementById(this.id + 'paper'),
+		scissors: document.getElementById(this.id + 'scissors')
 	};
 }
 
@@ -32,9 +24,17 @@ function playerElements(thisPlayer) {
 function Display() {
 	this.rounds = 0;
 	this.score = { rock: 1, paper: 1, scissors: 1, all: [] };
-	this.elements = {};
+	this.elements = {
+		score: document.getElementById('score-text'),
+		round: document.getElementById('round-text'),
+		rock: document.getElementById('rock-score'),
+		paper: document.getElementById('paper-score'),
+		scissors: document.getElementById('scissors-score')
+	};
+	this.elements.all = [ this.elements.rock, this.elements.paper, this.elements.scissors ];
+	this.audioWin = new Audio('audio/Whpsh.m4a');
 
-	// - Key press listener
+	// - Key press listener, check if q, w, e (P1) OR i, o, p (P2)
 	document.addEventListener('keyup', function(event) {
 		const keyName = event.key;
 		if ( p1.listener && ((keyName == 'q') || (keyName == 'w') || (keyName == 'e')) ) {
@@ -45,7 +45,7 @@ function Display() {
 		}
 	});
 
-	// - Player 1 button inputs
+	// - Player 1 click listeners
 	p1.elements.rock.addEventListener('click', ()=> {
 		if (p1.listener) {
 			disablePlayer(p1, 'q', p2);
@@ -62,7 +62,7 @@ function Display() {
 		}
 	});
 	
-	// - Player 2 button inputs
+	// - Player 2 click listeners
 	p2.elements.rock.addEventListener('click', ()=> {
 		if (p2.listener) {
 			disablePlayer(p2, 'i', p1);
@@ -78,16 +78,6 @@ function Display() {
 			disablePlayer(p2, 'p', p1);
 		}
 	});
-}
-// - Game info
-function displayElements(thisDisplay) {
-	thisDisplay.elements.score = document.getElementById('score-text');
-	thisDisplay.elements.round = document.getElementById('round-text');
-	thisDisplay.elements.rock = document.getElementById('rock-score');
-	thisDisplay.elements.paper = document.getElementById('paper-score');
-	thisDisplay.elements.scissors = document.getElementById('scissors-score');
-	thisDisplay.elements.all = [ thisDisplay.elements.rock, thisDisplay.elements.paper, thisDisplay.elements.scissors ];
-	thisDisplay.audioWin = new Audio('audio/Whpsh.m4a');
 }
 
 function startRound() {
@@ -164,7 +154,7 @@ function shakeHands() {
 	for (let i = 0; i < 3; i++) {
 		setTimeout(()=> {
 			display.elements.all[i].innerText = display.score.all[i];
-			document.querySelectorAll('img')[i].style.animation = 'upDown .33s';
+			document.querySelectorAll('img')[i].style.animation = 'upDown .333s';
 			audioSlap();
 		}, i*333);
 		// - Reset hand animation
@@ -226,69 +216,70 @@ function flashWinningP(winningHand, losingHand, handScore) {
 	setTimeout(()=> { winningHand.classList.add('btn-outline-success') }, 500);
 	setTimeout(()=> { winningHand.classList.remove('btn-outline-success') }, 1000);
 	setTimeout(()=> { winningHand.classList.add('btn-outline-success') }, 1500);
-	setTimeout(()=> {
-		winningHand.classList.remove('btn-outline-success');
-		handScore.style.fontWeight = 400;
-	}, 2000);
+	setTimeout(()=> { winningHand.classList.remove('btn-outline-success') }, 2000);
 
 	// - Prepare for next round
 	setTimeout(()=> {
+		handScore.style.fontWeight = 400;
 		winningHand.classList.remove('btn-success');
 		losingHand.classList.remove('btn-danger');
 	}, 2500);
 }
 
-// - Both hands briefly flash
+// - Both hands briefly flash during tie
 function flashTie(p1Hand, p2Hand) {
 	p1Hand.classList.remove('disabled');
 	p2Hand.classList.remove('disabled');
-
-	setTimeout(()=> { p1Hand.classList.add('btn-outline-secondary') }, 500);
-	setTimeout(()=> { p1Hand.classList.remove('btn-outline-secondary') }, 1000);
-	setTimeout(()=> { p2Hand.classList.add('btn-outline-secondary') }, 500);
-	setTimeout(()=> { p2Hand.classList.remove('btn-outline-secondary') }, 1000);
+	setTimeout(()=> {
+		p1Hand.classList.add('btn-outline-secondary');
+		p2Hand.classList.add('btn-outline-secondary');
+	}, 500);
+	setTimeout(()=> {
+		p1Hand.classList.remove('btn-outline-secondary');
+		p2Hand.classList.remove('btn-outline-secondary');
+	}, 1000);
 }
 
 // - Determine winner, apply points
 function scoreRound(){
 	switch (p1.choice) {
-		case 'q':
-			if (p2.choice == 'i') {
+		case 'q': 										//P1 - ROCK
+			if (p2.choice == 'i') { 					//P2 - ROCK
 				flashTie(p1.elements.rock, p2.elements.rock);
-			} else if (p2.choice == 'o') {
+			} else if (p2.choice == 'o') { 		//P2 - PAPER
 				p2.score += display.score.paper;
 				flashWinningP(p2.elements.paper, p1.elements.rock, display.elements.paper);
-			} else {
+			} else {													//P2 - SCISSORS
 				p1.score += display.score.rock;
 				flashWinningP(p1.elements.rock, p2.elements.scissors, display.elements.rock);
 			}
 			break;
-		case 'w':
-			if (p2.choice == 'i') {
+		case 'w': 										//P1 - PAPER
+			if (p2.choice == 'i') { 					//P2 - ROCK
 				p1.score += display.score.paper;
 				flashWinningP(p1.elements.paper, p2.elements.rock, display.elements.paper);
-			} else if (p2.choice == 'o') {
+			} else if (p2.choice == 'o') { 		//P2 - PAPER
 				flashTie(p1.elements.paper, p2.elements.paper);
-			} else {
+			} else {													//P2 - SCISSORS
 				p2.score += display.score.scissors;
-				flashWinningP(p2.elements.scissors,p1.elements.paper, display.elements.scissors);
+				flashWinningP(p2.elements.scissors, p1.elements.paper, display.elements.scissors);
 			}
 			break;
-		case 'e':
-			if (p2.choice == 'i') {
+		case 'e': 										//P1 - SCISSORS
+			if (p2.choice == 'i') { 					//P2 - ROCK
 				p2.score += display.score.rock;
 				flashWinningP(p2.elements.rock, p1.elements.scissors, display.elements.rock);
-			} else if (p2.choice == 'o') {
+			} else if (p2.choice == 'o') { 		//P2 - PAPER
 				p1.score += display.score.scissors;
 				flashWinningP(p1.elements.scissors, p2.elements.paper, display.elements.scissors);
-			} else {
+			} else {													//P2 - SCISSORS
 				flashTie(p1.elements.scissors, p2.elements.scissors);
 			}
 			break;
 	}
 
 	setTimeout(()=> {
-		display.elements.score.innerHTML = '<span class="bigger-text">' + p1.score + '</span> vs <span class="bigger-text">' + p2.score + '</span';
+		display.elements.score.innerHTML = '<span class="bigger-text">' + p1.score + '</span> vs <span class="bigger-text">' + p2.score + '</span>';
 		startRound();
 	}, 2500);
 }
