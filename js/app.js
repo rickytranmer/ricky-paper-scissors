@@ -1,13 +1,6 @@
 console.log('app.js loaded');
-
-let p1 = new Player(1);
-let p2 = new Player(2);
-let display = new Display();
-
-// - Start the game after a short delay
-setTimeout(() => { startRound() }, 333);
-
-// - New player
+// CONTSTRUCTOR FUNCTIONS
+// - Player
 function Player(id) {
 	this.id = id;
 	this.score = 0;
@@ -19,8 +12,18 @@ function Player(id) {
 		scissors: document.getElementById(this.id + 'scissors')
 	};
 }
+Player.prototype.gameWinner = function() {
+	setListeners(false);
+	display.elements.rock.innerText = 'PLAYER';
+	display.elements.paper.innerText = this.id;
+	display.elements.scissors.innerText = 'WINS';
+	display.elements.paper.style.fontWeight = 900;
+	this.elements.rock.classList.add('btn-success');
+	this.elements.paper.classList.add('btn-success');
+	this.elements.scissors.classList.add('btn-success');
+}
 
-// - Counters, display elements, and event listeners
+// - Display (counters, display elements, and event listeners)
 function Display() {
 	this.rounds = 0;
 	this.score = { rock: 1, paper: 1, scissors: 1, all: [] };
@@ -94,9 +97,9 @@ function startRound() {
 
 	// - Check if winner - else play!
 	if (p1.score >= 10) {
-		gameWinner(p1);
+		p1.gameWinner();
 	} else if (p2.score >= 10) {
-		gameWinner(p2);
+		p2.gameWinner();
 	} else {
 		// - Rock, Paper, Scissors!
 		setListeners(true);
@@ -114,16 +117,7 @@ function audioSlap() {
 	display.audio.play();
 }
 
-function gameWinner(thisPlayer) {
-	setListeners(false);
-	display.elements.rock.innerText = 'PLAYER';
-	display.elements.paper.innerText = thisPlayer.id;
-	display.elements.scissors.innerText = 'WINS';
-	display.elements.paper.style.fontWeight = 900;
-	thisPlayer.elements.rock.classList.add('btn-success');
-	thisPlayer.elements.paper.classList.add('btn-success');
-	thisPlayer.elements.scissors.classList.add('btn-success');
-}
+
 
 // - Shake hands, show pts, show round is starting
 function shakeHands() {
@@ -283,3 +277,11 @@ function scoreRound(){
 		startRound();
 	}, 2500);
 }
+
+// - Create player and display objects
+let p1 = new Player(1);
+let p2 = new Player(2);
+let display = new Display();
+
+// - Start the game after a short delay
+setTimeout(()=> { startRound() }, 333);

@@ -2,8 +2,6 @@ console.log('appSplit.js loaded');
 
 let p1 = new Player(1);
 let p2 = new Player(2);
-// playerElements(p1);
-// playerElements(p2);
 
 let display = new Display();
 displayElements(display);
@@ -22,32 +20,14 @@ function Player(id) {
 		scissors: document.getElementById(this.id + 'scissors')
 	};
 	this.scoring = { rock: 1, paper: 1, scissors: 1, all: [] };
-	// setTimeout(()=> {
-		this.scoringElements = {
-			rock: document.getElementById('rock-score' + this.id),
-			paper: document.getElementById('paper-score' + this.id),
-			scissors: document.getElementById('scissors-score' + this.id),
-			all: []
-		};
-		this.scoringElements.all = [ this.scoringElements.rock, this.scoringElements.paper, this.scoringElements.scissors ];
-		console.log(this);
-	// }, 250);
-
+	this.scoringElements = {
+		rock: document.getElementById('rock-score' + this.id),
+		paper: document.getElementById('paper-score' + this.id),
+		scissors: document.getElementById('scissors-score' + this.id),
+		all: []
+	};
+	this.scoringElements.all = [ this.scoringElements.rock, this.scoringElements.paper, this.scoringElements.scissors ];
 }
-// function playerElements(thisPlayer) {
-// 	thisPlayer.elements = {
-// 		rock: document.getElementById(thisPlayer.id + 'rock'),
-// 		paper: document.getElementById(thisPlayer.id + 'paper'),
-// 		scissors: document.getElementById(thisPlayer.id + 'scissors')
-// 	};
-// 	thisPlayer.scoringElements = {
-// 		rock: document.getElementById('rock-score' + thisPlayer.id),
-// 		paper: document.getElementById('paper-score' + thisPlayer.id),
-// 		scissors: document.getElementById('scissors-score' + thisPlayer.id),
-// 		all: []
-// 	};
-// 	thisPlayer.scoringElements.all = [ thisPlayer.scoringElements.rock, thisPlayer.scoringElements.paper, thisPlayer.scoringElements.scissors ]
-// }
 
 function Display() {
 	this.rounds = 0;
@@ -188,10 +168,7 @@ function scoreLayout(thisPlayer) {
 // - Shake hands, show pts, show round is starting
 function shakeHands() {
 	scoreLayout(p1);
-	// playerElements(p1);
 	scoreLayout(p2);
-	// playerElements(p2);
-	console.log(p1.scoring);
 
 	// - Shake animation for each hand img over period of 1 sec
 	for (let i = 0; i < 3; i++) {
