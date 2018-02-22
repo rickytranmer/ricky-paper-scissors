@@ -82,3 +82,12 @@ p {
     90% { transform: translate(0px, .75vh) rotate(1deg); }
     100% { transform: translate(0px, 0vh) rotate(0deg); }
 }
+
+@media only screen and (max-width : 850px) {
+	#p1-inputs, #p2-inputs {
+		display: none;
+	}
+	.player-one, .player-two {
+		padding-bottom: 2vh;
+	}
+}

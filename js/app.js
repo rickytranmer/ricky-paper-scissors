@@ -40,44 +40,44 @@ function Display() {
 	// - Key press listener, check if q, w, e (P1) OR i, o, p (P2)
 	document.addEventListener('keyup', function(event) {
 		const keyName = event.key;
-		if ( p1.listener && ((keyName == 'q') || (keyName == 'w') || (keyName == 'e')) ) {
+		if( p1.listener && ((keyName == 'q') || (keyName == 'w') || (keyName == 'e')) ) {
 			disablePlayer(p1, keyName, p2);
 		}
-		if ( p2.listener && ((keyName == 'i') || (keyName == 'o') || (keyName == 'p')) ) {
+		if( p2.listener && ((keyName == 'i') || (keyName == 'o') || (keyName == 'p')) ) {
 			disablePlayer(p2, keyName, p1);
 		}
 	});
 
 	// - Player 1 click listeners
 	p1.elements.rock.addEventListener('click', ()=> {
-		if (p1.listener) {
+		if(p1.listener) {
 			disablePlayer(p1, 'q', p2);
 		}
 	});
 	p1.elements.paper.addEventListener('click', ()=> {
-		if (p1.listener) {
+		if(p1.listener) {
 			disablePlayer(p1, 'w', p2);
 		}
 	});
 	p1.elements.scissors.addEventListener('click', ()=> {
-		if (p1.listener) {
+		if(p1.listener) {
 			disablePlayer(p1, 'e', p2);
 		}
 	});
 	
 	// - Player 2 click listeners
 	p2.elements.rock.addEventListener('click', ()=> {
-		if (p2.listener) {
+		if(p2.listener) {
 			disablePlayer(p2, 'i', p1);
 		}
 	});
 	p2.elements.paper.addEventListener('click', ()=> {
-		if (p2.listener) {
+		if(p2.listener) {
 			disablePlayer(p2, 'o', p1);
 		} 
 	});
 	p2.elements.scissors.addEventListener('click', ()=> {
-		if (p2.listener) {
+		if(p2.listener) {
 			disablePlayer(p2, 'p', p1);
 		}
 	});
@@ -97,9 +97,9 @@ function startRound() {
 	p2.elements.scissors.classList.remove('disabled');
 
 	// - Check if winner - else play!
-	if (p1.score >= 10) {
+	if(p1.score >= 10) {
 		p1.gameWinner();
-	} else if (p2.score >= 10) {
+	} else if(p2.score >= 10) {
 		p2.gameWinner();
 	} else {
 		// - Rock, Paper, Scissors!
@@ -164,7 +164,7 @@ function disablePlayer(thisPlayer, theirChoice, thatPlayer) {
 	thisPlayer.elements.scissors.classList.add('disabled');
 	thisPlayer.listener = false;
 
-	if (!thatPlayer.listener) {
+	if(!thatPlayer.listener) {
 		console.log(`p${thatPlayer.id} finished first`);
 		scoreRound();
 	}
@@ -174,9 +174,9 @@ function disablePlayer(thisPlayer, theirChoice, thatPlayer) {
 function scoreRound() {
 	switch (p1.choice) {
 		case 'q': 										//P1 - ROCK
-			if (p2.choice == 'i') { 					//P2 - ROCK
+			if(p2.choice == 'i') { 					//P2 - ROCK
 				flashTie(p1.elements.rock, p2.elements.rock);
-			} else if (p2.choice == 'o') { 		//P2 - PAPER
+			} else if(p2.choice == 'o') { 		//P2 - PAPER
 				p2.score += display.score.paper;
 				flashWinningPlayer(p2.elements.paper, p1.elements.rock, display.elements.paper);
 			} else {													//P2 - SCISSORS
@@ -185,10 +185,10 @@ function scoreRound() {
 			}
 			break;
 		case 'w': 										//P1 - PAPER
-			if (p2.choice == 'i') { 					//P2 - ROCK
+			if(p2.choice == 'i') { 					//P2 - ROCK
 				p1.score += display.score.paper;
 				flashWinningPlayer(p1.elements.paper, p2.elements.rock, display.elements.paper);
-			} else if (p2.choice == 'o') { 		//P2 - PAPER
+			} else if(p2.choice == 'o') { 		//P2 - PAPER
 				flashTie(p1.elements.paper, p2.elements.paper);
 			} else {													//P2 - SCISSORS
 				p2.score += display.score.scissors;
@@ -196,10 +196,10 @@ function scoreRound() {
 			}
 			break;
 		case 'e': 										//P1 - SCISSORS
-			if (p2.choice == 'i') { 					//P2 - ROCK
+			if(p2.choice == 'i') { 					//P2 - ROCK
 				p2.score += display.score.rock;
 				flashWinningPlayer(p2.elements.rock, p1.elements.scissors, display.elements.rock);
-			} else if (p2.choice == 'o') { 		//P2 - PAPER
+			} else if(p2.choice == 'o') { 		//P2 - PAPER
 				p1.score += display.score.scissors;
 				flashWinningPlayer(p1.elements.scissors, p2.elements.paper, display.elements.scissors);
 			} else {													//P2 - SCISSORS
