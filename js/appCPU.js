@@ -387,6 +387,5 @@ oneScissors.addEventListener('click', function() {
 	}
 });
 
-
 // - Start the game (after a short delay, and after audio loads)
 setTimeout(function() { audio.addEventListener("canplay", startRound()); }, 333);

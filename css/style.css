@@ -4,13 +4,17 @@ body {
 }
 h1, h3, a {
 	color: white;
+	transition: .333s ease all;
 }
 h3 {
 	text-align: right;
 }
 h4 {
 	color: red;
-	margin: 1.25vh auto;
+	margin: 1.2vh auto;
+}
+h5 {
+	margin-bottom: 0;
 }
 img {
 	width: 100%;
@@ -20,8 +24,8 @@ img {
 h1:hover, h3:hover, a:hover {
 	color: #FFDC00;
 }
-p {
-	margin-bottom: 1vh;
+p.btn {
+	margin: 2px auto;
 }
 
 .jumbotron {
@@ -33,7 +37,7 @@ p {
 	text-align: center;
 }
 .btn-hand {
-	padding: 2vh 1vh;
+	padding: 2vh 2px;
 	margin: 1vh auto;
 	font-size: 1.25rem;
 }
@@ -46,6 +50,10 @@ p {
 }
 .btn-secondary:not([disabled]):not(.disabled).active, .btn-secondary:not([disabled]):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
 	box-shadow: 0 0 0 0.5rem rgba(134,142,150,.5);
+}
+.btn-outline-secondary:not([disabled]), .btn-outline-secondary:hover {
+	background-color: transparent;
+	color: #868e96;
 }
 .player-two {
 	margin-bottom: 0vh;
@@ -67,6 +75,9 @@ p {
 }
 #reset-buttons button {
 	margin: 2vh 1vw;
+}
+#p1-inputs p, #p2-inputs p {
+	margin-bottom: 2px;
 }
 
 @keyframes upDown {

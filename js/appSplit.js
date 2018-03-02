@@ -161,8 +161,8 @@ function shakeHands() {
 	// - Shake animation for each hand img over period of 1 sec
 	for (let i = 0; i < 3; i++) {
 		setTimeout(()=> {
-			p1.scoringElements.all[i].innerText = p1.scoring.all[i];
-			p2.scoringElements.all[i].innerText = p2.scoring.all[i];
+			p1.scoringElements.all[i].innerText = `${p1.scoring.all[i]}pts`;
+			p2.scoringElements.all[i].innerText = `${p2.scoring.all[i]}pts`;
 			document.querySelectorAll('img')[i].style.animation = 'upDown .33s';
 			document.querySelectorAll('img')[i+3].style.animation = 'upDown .33s';
 			audioSlap();
