@@ -42,5 +42,5 @@ Rather than choose a random hand, the CPU will base its decision on the point va
 ### TODO
 
 - add mute audio button to header
-- think of new modes
+- new modes
 - add sounds, images, animations on certain conditions
