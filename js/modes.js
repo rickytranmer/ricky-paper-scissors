@@ -65,6 +65,6 @@ function twoGame() {
 // Service Worker
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/ricky-paper-scissors/sw.js');
+    navigator.serviceWorker.register('/ricky-paper-scissors/service-worker.js');
   });
 }
