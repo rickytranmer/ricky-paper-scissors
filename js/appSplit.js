@@ -239,16 +239,18 @@ function flashWinningPlayer(winningHand, losingHand, handScore) {
 // - Both hands briefly flash
 function flashTie(p1Hand, p2Hand) {
 	p1Hand.classList.remove('disabled');
+	console.log(document.querySelectorAll('img'));
 	p2Hand.classList.remove('disabled');
 
+	//TODO - Hide the other hand images, only show the hand that the players chose
 	setTimeout(()=> { p1Hand.classList.add('btn-outline-secondary'); }, 500);
-	setTimeout(()=> { p1Hand.classList.remove('btn-outline-secondary'); }, 1000);
 	setTimeout(()=> { p2Hand.classList.add('btn-outline-secondary'); }, 500);
+	setTimeout(()=> { p1Hand.classList.remove('btn-outline-secondary'); }, 1000);
 	setTimeout(()=> { p2Hand.classList.remove('btn-outline-secondary'); }, 1000);
 }
 
 // - Determine winner, apply points
-function scoreRound(){
+function scoreRound() {
 	switch (p1.choice) {
 		case 'q':
 			if (p2.choice == 'i') {

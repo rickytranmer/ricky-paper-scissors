@@ -1,0 +1,15 @@
+{
+  "short_name": "RPS",
+  "name": "RICKY PAPPER SCISSORS",
+  "icons": [
+    {
+      "src": "images/rps.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#FFFFFF",
+  "background_color": "#000000"
+}

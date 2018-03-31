@@ -61,3 +61,10 @@ function twoGame() {
 	pageVars.vsCpu.classList.remove('active');
 	pageVars.twoPlayer.classList.add('active');
 }
+
+// Service Worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/service-worker.js');
+  });
+}

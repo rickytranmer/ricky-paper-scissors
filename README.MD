@@ -18,7 +18,7 @@ This game uses HTML, CSS, JS, & Bootstrap.  This project gave excellent practice
 
 ### Inspiration
 
-I came up with the idea for this game while trying to think of simplifying the fighting game idea of [Yomi](http://forums.shoryuken.com/discussion/113407/yomi-thread-yomi-the-japanese-word-for-reading-the-mind-of-your-opponent).  That link is for a card game, but the logic translates well to fighting games.  Yomi itself if based on fighting game concepts.
+I came up with the idea for this game while trying to think of simplifying the fighting game idea of [Yomi](http://forums.shoryuken.com/discussion/113407/yomi-thread-yomi-the-japanese-word-for-reading-the-mind-of-your-opponent).  That link is for a card game, but the logic translates well to fighting games.  Yomi itself is based on fighting game concepts.
 
 ### CPU Logic
 
