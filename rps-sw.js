@@ -11,6 +11,9 @@ const cacheFiles = [
 	'./js/app.js',
 	'./js/appSplit.js',
 	'./css/style.css',
+	'./images/paper.png',
+	'./images/rock.png',
+	'./images/scissors.png'
 ]
 
 self.addEventListener('install', function(e) {

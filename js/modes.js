@@ -18,6 +18,7 @@ function PageVars() {
 }
 
 function startTheGame() {
+	debugger;
 	window.location = pageVars.gameMode;
 }
 
